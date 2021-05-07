@@ -3,6 +3,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 
+const userRoutes = require('./routes/userApi');
+
 const App = express();
 const PORT = process.env.PORT || 5000;
 
@@ -18,5 +20,6 @@ mongoose.connect(
     ()=> console.log('db connected')
 );
 
+App.use('/api/user' , userRoutes);
 
 App.listen(PORT , ()=> console.log(`server started on port: ${PORT}`));
