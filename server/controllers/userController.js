@@ -1,6 +1,7 @@
 const model = require('../models/userModel');
 const bcrypt = require('bcrypt');
-const {registerValidation} = require('../validations/userValidation');
+const jwt = require('jsonwebtoken');
+const {registerValidation,loginValidation} = require('../validations/userValidation');
 
 async function register(req , res) {
     let {error} = await registerValidation(req.body);
@@ -33,6 +34,52 @@ async function register(req , res) {
     }
 }
 
+async function login(req , res) {
+    let {error} = await loginValidation(req.body);
+    if(error){
+        return res.json({
+            msg: error.details[0].message,
+            status: 406
+        });
+    }else{
+        const findByUser = await model.findOne({username: req.body.username});
+        if(!findByUser){
+            return res.json({
+                msg: 'cant find user with this username',
+                status: 406
+            });
+        }
+        else{
+            let comparePass = await bcrypt.compare(
+                req.body.password , findByUser.password
+            );
+            if(!comparePass){
+                return res.json({
+                    msg: 'password dont match!',
+                    status: 406
+                });
+            }
+
+            const today = new Date();
+            const tomorrow = new Date(today);
+            tomorrow.setDate(today.getDate() + 1);
+            
+            const token = await jwt.sign(
+                {token: findByUser} , process.env.ACCESS_TOKEN
+            );
+            
+            res.json({
+                status: 200,
+                data: {
+                    token,
+                    exp: tomorrow
+                }
+            })
+        }
+    }
+}
+
 module.exports = {
-    register
+    register,
+    login
 }
