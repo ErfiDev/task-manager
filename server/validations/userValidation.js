@@ -27,7 +27,18 @@ const loginValidation = (data)=>{
     return schema.validate(data);
 }
 
+const taskValidation = (data)=>{
+    const schema = joi.object({
+        title: joi.string().required(),
+        status: joi.boolean().required(),
+        endTime: joi.date().min('now')
+    });
+
+    return schema.validate(data);
+}
+
 module.exports = {
     registerValidation,
-    loginValidation
+    loginValidation,
+    taskValidation
 }
