@@ -56,7 +56,7 @@ async function login(req, res) {
     if (!findByUser) {
       return res.json({
         msg: "cant find user with this username",
-        status: 406,
+        status: 404,
       });
     } else {
       let comparePass = await bcrypt.compare(
@@ -251,10 +251,15 @@ async function deleteTask(req, res) {
   }
 }
 
+async function logout(req , res) {
+  res.send('logout');
+}
+
 module.exports = {
   register,
   login,
   addTask,
   editTask,
   deleteTask,
+  logout
 };
