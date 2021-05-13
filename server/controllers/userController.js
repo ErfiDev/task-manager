@@ -252,7 +252,33 @@ async function deleteTask(req, res) {
 }
 
 async function logout(req , res) {
-  res.send('logout');
+  const {uuid} = req.params;
+  if(!uuid){
+    return res.json({
+      msg: 'please complete required parametr!',
+      status: 406
+    })
+  } else {
+    const findUser = await model.findOne({uuid});
+    if(!findUser){
+      return res.json({
+        msg: 'cannot find user with thid uuid',
+        status: 404
+      })
+    } else {
+      await model.deleteOne({uuid} , (error) => {
+        if(error) return res.json({
+          msg: 'cannot delete user!',
+          status: 503
+        });
+
+        res.json({
+          status: 200,
+          msg: 'delete user successful!'
+        })
+      })
+    }
+  }
 }
 
 module.exports = {
