@@ -20,7 +20,7 @@ this project is a simple practice to grow up skills and problem-solving
 
 ## step 3
 create a MongoDB database in locally or.....
-and open server directory and create a .end file 
+and open server directory and create .env file 
 and put the database URL to DB variable
 
 
