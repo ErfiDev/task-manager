@@ -203,7 +203,52 @@ async function editTask(req, res) {
   }
 }
 
-async function deleteTask(req, res) {}
+async function deleteTask(req, res) {
+  const {uuid , uuidTask} = req.params;
+  if(!uuid || !uuidTask){
+    return res.json({
+      msg: 'please complete required parametr!',
+      status: 406
+    })
+  }
+  else {
+    const find = await model.findOne({uuid});
+    if(!find){
+      return res.json({
+        msg: 'cannot find user with this uuid!',
+        status: 404
+      })
+    } else {
+      let {tasks} = find;
+      let findTask = tasks.some(item => item.uuid === uuidTask);
+      if(!findTask){
+        return res.json({
+          msg: 'cannot find task with this uuid task',
+          status: 404
+        })
+      } else {
+        let filteredTasks = tasks.filter(item => item.uuid !== uuidTask);
+        await model.updateOne(
+          {uuid},
+          {
+            $set: { tasks: filteredTasks }
+          },{},
+          (error)=> {
+            if(error) return res.json({
+              msg: 'cannot delete tasks!',
+              status: 503
+            })
+
+            res.json({
+              status: 200,
+              msg: 'delete task successful' 
+            })
+          }
+        );
+      }
+    }
+  }
+}
 
 module.exports = {
   register,
