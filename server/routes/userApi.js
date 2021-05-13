@@ -11,7 +11,7 @@ const {
 route.post("/register", register);
 route.post("/login", login);
 route.post("/addTask/:uuid?", addTask);
-route.post("/editTask/:uuid?", editTask);
+route.post("/editTask/:uuid?/:uuidTask?", editTask);
 route.post("/deleteTask/:uuid?", deleteTask);
 
 module.exports = route;
