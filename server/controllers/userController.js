@@ -1,12 +1,12 @@
 const model = require("../models/userModel");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const {updateTask} = require('../utils/updateTask');
+const { updateTask } = require("../utils/updateTask");
 const {
   registerValidation,
   loginValidation,
   taskValidation,
-  editTaskValidation
+  editTaskValidation,
 } = require("../validations/userValidation");
 
 async function register(req, res) {
@@ -128,14 +128,14 @@ async function addTask(req, res) {
             status: 200,
           });
         } else {
-            await model.updateOne(
-                { uuid },
-                {
-                  $push: {
-                    tasks: { title, status , endTime },
-                  },
-                }
-              );
+          await model.updateOne(
+            { uuid },
+            {
+              $push: {
+                tasks: { title, status, endTime },
+              },
+            }
+          );
 
           res.json({
             msg: "add task successful!",
@@ -147,69 +147,68 @@ async function addTask(req, res) {
   }
 }
 
-async function editTask(req , res) {
-    let { uuid , uuidTask } = req.params;
-    if(!uuid || !uuidTask) return res.json({
-        msg: 'please complete required parametr',
-        status: 406
+async function editTask(req, res) {
+  let { uuid, uuidTask } = req.params;
+  if (!uuid || !uuidTask)
+    return res.json({
+      msg: "please complete required parametr",
+      status: 406,
     });
-    else{
-        let find = await model.findOne({uuid});
-        if(!find) return res.json({
-            msg: 'cannot find user with this uuid!',
-            status: 404
+  else {
+    let find = await model.findOne({ uuid });
+    if (!find)
+      return res.json({
+        msg: "cannot find user with this uuid!",
+        status: 404,
+      });
+    else {
+      let { error } = await editTaskValidation(req.body);
+      if (error) {
+        return res.json({
+          msg: error.details[0].message,
+          status: 406,
         });
-        else{
-            let { error } = await editTaskValidation(req.body);
-            if (error) {
-                return res.json({
-                msg: error.details[0].message,
-                status: 406,
-                });
-            }else{
-                let {title , endTime , status} = req.body;
-                let { tasks } = find;
-                let allTasks = tasks.filter(item => item.uuid !== uuidTask);
-                let filterOne = tasks.filter(item => item.uuid === uuidTask)[0];
+      } else {
+        let { title, endTime, status } = req.body;
+        let { tasks } = find;
+        let allTasks = tasks.filter((item) => item.uuid !== uuidTask);
+        let filterOne = tasks.filter((item) => item.uuid === uuidTask)[0];
 
-                if(!filterOne){
-                  return res.json({
-                    msg: 'cannot find task with this task uuid',
-                    status: 404
-                  })
-                } else {
-                  if(title && !endTime && !status){
-                      filterOne.title = title;
-                      return updateTask(allTasks,filterOne,uuid)
-                      .then(response => res.json(response))
-                      .catch(er => res.json(er));
-                  }
-                  if(!title && endTime && !status){
-                      filterOne.endTime = endTime;
-                      return updateTask(allTasks,filterOne,uuid)
-                      .then(response => res.json(response))
-                      .catch(er => res.json(er));
-                  }
-                  else {
-                    filterOne.status = status;
-                    return updateTask(allTasks,filterOne,uuid)
-                    .then(r => res.json(r))
-                    .catch(er => res.json(er));
-                  }
-                }
-            }
+        if (!filterOne) {
+          return res.json({
+            msg: "cannot find task with this task uuid",
+            status: 404,
+          });
+        } else {
+          if (title && !endTime && !status) {
+            filterOne.title = title;
+            return updateTask(allTasks, filterOne, uuid)
+              .then((response) => res.json(response))
+              .catch((er) => res.json(er));
+          }
+          if (!title && endTime && !status) {
+            filterOne.endTime = endTime;
+            return updateTask(allTasks, filterOne, uuid)
+              .then((response) => res.json(response))
+              .catch((er) => res.json(er));
+          } else {
+            filterOne.status = status;
+            return updateTask(allTasks, filterOne, uuid)
+              .then((r) => res.json(r))
+              .catch((er) => res.json(er));
+          }
         }
+      }
     }
+  }
 }
 
-async function deleteTask(req , res) {
-    
-}
+async function deleteTask(req, res) {}
 
 module.exports = {
   register,
   login,
   addTask,
   editTask,
-  deleteTask
+  deleteTask,
 };

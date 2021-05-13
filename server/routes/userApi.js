@@ -12,6 +12,6 @@ route.post("/register", register);
 route.post("/login", login);
 route.post("/addTask/:uuid?", addTask);
 route.post("/editTask/:uuid?/:uuidTask?", editTask);
-route.post("/deleteTask/:uuid?", deleteTask);
+route.post("/deleteTask/:uuid?/:uuidTask?", deleteTask);
 
 module.exports = route;
