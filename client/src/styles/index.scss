@@ -1,1 +1,61 @@
 @use "./utils.scss" as *;
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+#root{
+    background-color: $backColor;
+    width: 100vw;
+    height: 100vh;
+    overflow: scroll;
+    overflow-x: hidden;
+    position: relative;
+    &::-webkit-scrollbar{
+        width: 10px;
+    }&::-webkit-scrollbar-button{
+        width: 0;
+        height: 0;
+    }&::-webkit-scrollbar-thumb{
+        width: 100%;
+        #{$bc}: #9e9e9e;
+    }
+}
+
+@keyframes load{
+    0%{
+        opacity: 0;
+    }
+    10%{
+        opacity: 0;
+    }
+    20%{
+        opacity: 0;
+    }
+   30%{
+        opacity: 0;
+    }
+    40%{
+        opacity: 0;
+    }
+    50%{
+        opacity: 0;
+    }
+    60%{
+        opacity: 0;
+    }
+    70%{
+        opacity: 0;
+    }
+    80%{
+        opacity: 0;
+    }
+    90%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
