@@ -6,6 +6,7 @@ import {
 	Assignment,
 	AddCircle,
 } from '@material-ui/icons';
+import { Link } from 'react-router-dom';
 import { sideBar } from '../utils/utils';
 
 const SideBar = () => {
@@ -16,20 +17,28 @@ const SideBar = () => {
 			</button>
 			<ul className='side-bar-ul'>
 				<li className='side-bar-ul-li' onClick={() => sideBar(false)}>
-					<AddCircle fontSize='inherit' color='inherit' />
-					&nbsp; Add Task
+					<Link to='/addTask'>
+						<AddCircle fontSize='inherit' color='inherit' />
+						&nbsp; Add Task
+					</Link>
 				</li>
 				<li className='side-bar-ul-li' onClick={() => sideBar(false)}>
-					<Assignment fontSize='inherit' color='inherit' />
-					&nbsp; All Tasks
+					<Link to='/allTasks'>
+						<Assignment fontSize='inherit' color='inherit' />
+						&nbsp; All Tasks
+					</Link>
 				</li>
 				<li className='side-bar-ul-li' onClick={() => sideBar(false)}>
-					<Person fontSize='inherit' color='inherit' />
-					&nbsp; Account
+					<Link to='/account'>
+						<Person fontSize='inherit' color='inherit' />
+						&nbsp; Account
+					</Link>
 				</li>
 				<li className='side-bar-ul-li' onClick={() => sideBar(false)}>
-					<Settings fontSize='inherit' color='inherit' />
-					&nbsp; Setting
+					<Link to='/setting'>
+						<Settings fontSize='inherit' color='inherit' />
+						&nbsp; Setting
+					</Link>
 				</li>
 			</ul>
 		</div>
