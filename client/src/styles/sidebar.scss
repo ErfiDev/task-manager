@@ -2,11 +2,7 @@
     min-height: 100vh;
     height: auto;
     width: 30%;
-    #{$bc}: rgba(255, 255, 255, 0.068);
-    backdrop-filter: blur( 15.0px );
-    -webkit-backdrop-filter: blur( 15.0px );
-    -moz-backdrop-filter: blur( 15.0px );
-    -o-backdrop-filter: blur( 15.0px );
+    #{$bc}: $backColor;
     z-index: 600000;
     transition: all 0.5s ease-out;
     @include Flex(center , center);
@@ -19,12 +15,28 @@
         margin: 0;
         color: $fontColor;
         font-size: clamp(2vw , 3vw , 3.5vw);
+        position: relative;
+        width: 100%;
+        &::after{
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 4px;
+            height: 100%;
+            #{$bc}: $fontColor;
+        }
 
         &-li{
             margin: 20px;
             cursor: pointer;
             transition: all 0.3s ease-in-out;
             position: relative;
+            width: 80%;
+            a{
+                text-decoration: none;
+                color: inherit;
+            }
             &::after{
                 content: "";
                 position: absolute;
@@ -43,9 +55,30 @@
         }
     }
 
+    &-close{
+        #{$bc}: rgba(255, 255, 255, 0);
+        color: $fontColor;
+        border: none;
+        outline: none;
+        display: none;
+        cursor: pointer;
+        margin-bottom: 20px;
+    }
+
     @media (max-width : 980px) {
         position: fixed;
         top: 0;
         left: -100%;
+        width: 100%;
+        &-ul{
+            font-size: 2rem;
+            &::after{
+                width: 0;
+                height: 0;
+            }
+        }
+        &-close{
+            display: flex;
+        }
     }
 }

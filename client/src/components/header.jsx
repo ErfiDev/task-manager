@@ -1,9 +1,10 @@
 import React from 'react';
+import { sideBar } from '../utils/utils';
 
 const Header = () => {
 	return (
 		<header className='header'>
-			<div className='header-hamburger'>
+			<div className='header-hamburger' onClick={() => sideBar(true)}>
 				<svg
 					xmlns='http://www.w3.org/2000/svg'
 					viewBox='0 0 64 64'

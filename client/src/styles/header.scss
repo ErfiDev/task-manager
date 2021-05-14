@@ -1,13 +1,15 @@
 .header {
     display: none;
     width: 100%;
-    height: 100px;
+    min-height: 80px;
+    height: auto;
     #{$bc}: rgba(255, 255, 255, 0.041);
     backdrop-filter: blur( 2.5px );
     -webkit-backdrop-filter: blur( 2.5px );
 
     &-hamburger{
         margin-left: 50px;
+        cursor: pointer;
     }
 
     @media (max-width : 980px) {
