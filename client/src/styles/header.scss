@@ -1,0 +1,19 @@
+.header {
+    display: none;
+    width: 100%;
+    height: 100px;
+    #{$bc}: rgba(255, 255, 255, 0.041);
+    backdrop-filter: blur( 2.5px );
+    -webkit-backdrop-filter: blur( 2.5px );
+
+    &-hamburger{
+        margin-left: 50px;
+    }
+
+    @media (max-width : 980px) {
+        @include Flex(flex-start , center);
+        position: sticky;
+        top: 0;
+        left: 0;
+    }
+}
