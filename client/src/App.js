@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { Fragment } from 'react';
+import Layout from './components/layout';
 import './styles/index.scss';
 
 const App = () => {
 	return (
-		<div className='div'>
-			<h1>Salam</h1>
-		</div>
+		<Fragment>
+			<Layout />
+		</Fragment>
 	);
 };
 

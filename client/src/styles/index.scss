@@ -1,4 +1,6 @@
 @use "./utils.scss" as *;
+@import "./sidebar.scss";
+@import "./main.scss";
 
 * {
     padding: 0;
@@ -22,6 +24,13 @@
         width: 100%;
         #{$bc}: #9e9e9e;
     }
+}
+
+.layout{
+    width: 100%;
+    min-height: 100%;
+    height: auto;
+    @include Flex(center,flex-start);
 }
 
 @keyframes load{

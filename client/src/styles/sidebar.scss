@@ -1,0 +1,16 @@
+.side-bar{
+    min-height: 100vh;
+    height: auto;
+    width: 30%;
+    #{$bc}: rgba(255, 255, 255, 0.068);
+    backdrop-filter: blur( 15.0px );
+    -webkit-backdrop-filter: blur( 15.0px );
+    -moz-backdrop-filter: blur( 15.0px );
+    -o-backdrop-filter: blur( 15.0px );
+    z-index: 600000;
+    transition: all 0.5s ease-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
