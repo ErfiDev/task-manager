@@ -8,3 +8,13 @@
         width: 100%;
     }
 }
+.task {
+    width: 70%;
+    min-height: 100vh;
+    height: auto;
+    #{$bc}: blue;
+
+    @media (max-width : 980px) {
+        width: 100%;
+    }
+}
