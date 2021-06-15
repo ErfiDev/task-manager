@@ -1,4 +1,5 @@
 import React from "react";
+import propTypes from "prop-types";
 
 const Account = ({ username, joinedDate, allTask }) => {
   return (
@@ -11,6 +12,12 @@ const Account = ({ username, joinedDate, allTask }) => {
       </ul>
     </div>
   );
+};
+
+Account.propTypes = {
+  username: propTypes.string,
+  joinedDate: propTypes.string,
+  allTask: propTypes.number,
 };
 
 export default Account;
