@@ -16,14 +16,23 @@ const Layout = () => {
     <div className="layout">
       <SideBar />
       <Switch>
-        <Route path="/login" exact component={Login} />
-        <Route path="/register" exact component={Register} />
-        <Route path="/addTask" exact component={AddTask} />
-        <Route path="/allTasks" exact component={Tasks} />
-        <Route path="/task/:uuid" exact component={Task} />
-        <Route path="/setting" exact component={Setting} />
-        <Route path="/admin" exact component={Admin} />
-        <Route path="/account" exact component={Account} />
+        <Route path="/login" component={Login} />
+        <Route path="/register" component={Register} />
+        <Route path="/addTask" component={AddTask} />
+        <Route path="/allTasks" component={Tasks} />
+        <Route path="/task/:uuid" component={Task} />
+        <Route path="/setting" component={Setting} />
+        <Route path="/admin" component={Admin} />
+        <Route
+          path="/account"
+          render={() => {
+            <Account
+              allTask={14}
+              joinedDate="2021,4,10"
+              username="erfanHanifezade"
+            />;
+          }}
+        />
         <Route path="/" exact component={Main} />
       </Switch>
     </div>
