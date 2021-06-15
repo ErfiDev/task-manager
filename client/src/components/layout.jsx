@@ -25,13 +25,13 @@ const Layout = () => {
         <Route path="/admin" component={Admin} />
         <Route
           path="/account"
-          render={() => {
+          render={() => (
             <Account
               allTask={14}
               joinedDate="2021,4,10"
               username="erfanHanifezade"
-            />;
-          }}
+            />
+          )}
         />
         <Route path="/" exact component={Main} />
       </Switch>
