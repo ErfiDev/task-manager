@@ -41,6 +41,36 @@
     @include Flex(center,flex-start);
 }
 
+.footer{
+    width: 100%;
+    min-height: 200px;
+    height: auto;
+    @include Flex(center , center);
+    border-top: dotted 4px $fontColor;
+    margin-top: 30px;
+    .footer-p{
+        color: $fontColor;
+        text-align: center;
+        .who{
+            padding: 0 5px 0 5px;
+            #{$bc}: rgba(0, 0, 0, 0.918);
+            cursor: pointer;
+            color: black;
+            &:hover{
+                color: $fontColor;
+                #{$bc}: rgba(0, 0, 0, 0);
+            }
+            @media (max-width: 595px){
+                display: block;
+                margin: 5px;
+            }
+        }
+        @media (min-width: 1600px){
+            font-size: 2.5rem;
+        }
+    }
+}
+
 @keyframes load{
     0%{
         opacity: 0;
