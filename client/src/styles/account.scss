@@ -2,15 +2,16 @@
     width: 70%;
     min-height: 100vh;
     height: auto;
-    @include Flex(space-around , center);
+    @include Flex(flex-start , center);
     flex-direction: column;
-
-
+    
+    // DIV tag
     .user-picture{
         width: clamp(70% , 500px , 95%);
         height: clamp(200px , 300px , 450px);
         margin-bottom: 20px;
         @include Flex(center , center);
+        margin-top: 20px;
         .picture-container{
             width: clamp(200px , 250px , 300px);
             height: clamp(200px , 250px , 300px);
@@ -27,8 +28,52 @@
         }
     }
 
+    // UL tag
     .user-info{
-        #{$bc}: blue;
+        width: clamp(70% , 500px , 95%);
+        height: clamp(150px , 200px , 250px);
+        list-style: none;
+        margin-top: 20px;
+        @include Flex(space-around , center);
+        flex-direction: column;
+        color: $fontColor;
+        font-size: 1.5rem;
+        border-top: solid 4px $fontColor;
+        &-option{
+            width: 85%;
+            text-align: end;
+            position: relative;
+            &::before{
+                position: absolute;
+                top: 0;
+                left: 0;
+            }
+        }
+        .info-1{
+            &::before{
+                content: "Username:";   
+            }
+        }
+        .info-2{
+            &::before{
+                content: "Joined date:";
+            }
+        }
+        .info-3{
+            &::before{
+                content: "Total task:";
+            }
+        }
+
+        @media (max-width: 535px){
+            font-size: 1.2rem;
+        }
+        @media (max-width: 350px){
+            font-size: 1rem;
+        }
+        @media (min-width: 1600px){
+            font-size: 2.2rem;
+        }
     }
 
     @media (max-width : 980px) {

@@ -15,9 +15,9 @@ const Account = ({ username, joinedDate, allTask }) => {
         </div>
       </div>
       <ul className="user-info">
-        <li>{username}</li>
-        <li>{joinedDate}</li>
-        <li>{allTask}</li>
+        <li className="user-info-option info-1">{username}</li>
+        <li className="user-info-option info-2">{joinedDate}</li>
+        <li className="user-info-option info-3">{allTask}</li>
       </ul>
     </div>
   );
