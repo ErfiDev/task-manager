@@ -2,7 +2,21 @@
     width: 70%;
     min-height: 100vh;
     height: auto;
-    #{$bc}: blue;
+    @include Flex(center , center);
+    &-form{
+        width: clamp(70% , 80% , 90%);
+        height: auto;
+        @include Flex(center , center);
+        flex-direction: column;
+        padding: 20px;
+        #{$bc}: rgba(255, 255, 255, 0.712);
+        .MuiFormControl-root{
+            margin: 10px;
+        }
+        .addTask-form-submit{
+            margin-top: 30px;
+        }
+    }
 
     @media (max-width : 980px) {
         width: 100%;
