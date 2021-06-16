@@ -38,7 +38,8 @@
         flex-direction: column;
         color: $fontColor;
         font-size: 1.5rem;
-        border-top: solid 4px $fontColor;
+        border-top: dotted 2px $fontColor;
+        padding: 20px 0 0 0;
         &-option{
             width: 85%;
             text-align: end;
