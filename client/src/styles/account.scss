@@ -2,7 +2,34 @@
     width: 70%;
     min-height: 100vh;
     height: auto;
-    $bc: blue;
+    @include Flex(space-around , center);
+    flex-direction: column;
+
+
+    .user-picture{
+        width: clamp(70% , 500px , 95%);
+        height: clamp(200px , 300px , 450px);
+        margin-bottom: 20px;
+        @include Flex(center , center);
+        .picture-container{
+            width: clamp(200px , 250px , 300px);
+            height: clamp(200px , 250px , 300px);
+            #{$bc}: green;
+            overflow: hidden;
+            border-radius: 50%;
+            border: solid 3px $fontColor;
+            .profile-picture{
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                cursor: pointer;
+            }
+        }
+    }
+
+    .user-info{
+        #{$bc}: blue;
+    }
 
     @media (max-width : 980px) {
         width: 100%;
