@@ -5,6 +5,7 @@ import Footer from "./components/footer";
 import Register from "./components/register";
 import Login from "./components/login";
 import { ToastContainer } from "react-toastify";
+import jwt from "jsonwebtoken";
 import "react-toastify/dist/ReactToastify.css";
 import "./styles/index.scss";
 
@@ -16,7 +17,13 @@ const App = () => {
       localStorage.setItem("token", "");
       return setUserStatus(false);
     } else {
-      return setUserStatus(true);
+      let read = localStorage.getItem("token");
+      let decode = jwt.decode(read, { complete: true });
+      if (!decode) {
+        return setUserStatus(false);
+      } else {
+        setUserStatus(true);
+      }
     }
   }, []);
 
