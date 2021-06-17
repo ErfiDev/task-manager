@@ -7,9 +7,11 @@ import {
   Button,
 } from "@material-ui/core";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
+import { registerUser } from "../services/userService";
+import { toast } from "react-toastify";
 
-const Register = () => {
+const Register = ({ history }) => {
   const [data, setData] = useState({
     password: "",
     username: "",
@@ -25,9 +27,36 @@ const Register = () => {
   function clearInputs() {
     return setData({ ...data, username: "", password: "", fullname: "" });
   }
-  function submit(e) {
+  async function submit(e) {
     e.preventDefault();
-    console.log(data);
+    try {
+      const info = {
+        username: data.username,
+        password: data.password,
+        isAdmin: false,
+      };
+      const { data: response } = await registerUser(info);
+      if (response.status === 201) {
+        setTimeout(() => {
+          history.push("/");
+          toast("please login", {
+            position: "bottom-left",
+            closeOnClick: true,
+          });
+        }, 3000);
+        return toast.success("register successfull!", {
+          position: "bottom-left",
+          closeOnClick: true,
+        });
+      } else {
+        toast.error(response.msg, {
+          position: "bottom-left",
+          closeOnClick: true,
+        });
+      }
+    } catch (err) {
+      console.log(err);
+    }
   }
   return (
     <div className="register">
@@ -92,4 +121,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default withRouter(Register);
