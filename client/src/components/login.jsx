@@ -8,6 +8,8 @@ import {
 } from "@material-ui/core";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
 import { Link } from "react-router-dom";
+import { loginUser } from "../services/userService";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const [data, setData] = useState({
@@ -24,9 +26,34 @@ const Login = () => {
   function clearInputs() {
     return setData({ ...data, username: "", password: "" });
   }
-  function submit(e) {
+  async function submit(e) {
     e.preventDefault();
-    console.log(data);
+    try {
+      let info = {
+        username: data.username,
+        password: data.password,
+      };
+      const { data: response } = await loginUser(info);
+      if (response.status === 200) {
+        let { token, exp } = response.data;
+        localStorage.setItem("token", token);
+        localStorage.setItem("exp", exp);
+        setTimeout(() => {
+          window.location.reload();
+        }, 3000);
+        return toast.success("Login successfull!", {
+          position: "bottom-left",
+          closeOnClick: true,
+        });
+      } else {
+        toast.error(response.msg, {
+          position: "bottom-left",
+          closeOnClick: true,
+        });
+      }
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   return (

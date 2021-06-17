@@ -4,6 +4,8 @@ import FullLayout from "./components/fullLayout";
 import Footer from "./components/footer";
 import Register from "./components/register";
 import Login from "./components/login";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./styles/index.scss";
 
 const App = () => {
@@ -28,6 +30,7 @@ const App = () => {
         </Route>
       </Switch>
       <Footer />
+      <ToastContainer />
     </Fragment>
   );
 };
