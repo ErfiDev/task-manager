@@ -2,7 +2,34 @@
     width: 70%;
     min-height: 100vh;
     height: auto;
-    #{$bc}: blue;
+    @include Flex(center , center);
+    &-list{
+        list-style: none;
+        color: $fontColor;
+        font-size: 1.5rem;
+        .dashboard-list-option{
+            position: relative;
+            margin: 30px;
+            z-index: 10;
+            cursor: pointer;
+            &::before{
+                content: "";
+                position: absolute;
+                left: 0;
+                bottom: 0;
+                height: 5px;
+                width: 100%;
+                #{$bc}: $otherColor;
+                z-index: 8;
+                transition: all 0.3s ease-out;
+            }
+            &:hover::before{
+                #{$bc}: #3c415c73;
+                height: 15px;
+            }
+        }
+    }
+    
 
     @media (max-width : 980px) {
         width: 100%;
