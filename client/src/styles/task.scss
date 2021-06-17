@@ -27,7 +27,6 @@
     width: 70%;
     min-height: 100vh;
     height: auto;
-    #{$bc}: blue;
 
     @media (max-width : 980px) {
         width: 100%;
@@ -38,7 +37,45 @@
     width: 70%;
     min-height: 100vh;
     height: auto;
-    #{$bc}: blue;
+    @include Flex(space-around , flex-start);
+    flex-wrap: wrap;
+    padding: 10px;
+    .single-task{
+        width: 45%;
+        min-height: 250px;
+        height: auto;
+        margin: 10px;
+        border: solid 3px $fontColor;
+        border-radius: 10px;
+        @include Grid(1fr , 1fr 1fr);
+        padding: 10px;
+        color: $fontColor;
+        &-title , &-time{
+            padding-left: 7px;
+        }
+        &-status-container{
+            @include Flex(flex-end , center);
+            .task-check , .task-delete{
+                margin: 0 10px 0 10px;
+                padding: 0 10px 0 10px;
+                border-radius: 4px;
+                cursor: pointer;
+                border: none;
+                outline: none;
+                text-align: center;
+                color: white;
+            }
+            .task-check{
+                #{$bc}: #1E6F5C;
+            }
+            .task-delete{
+                #{$bc}: #CE1212;
+            }
+        }
+        @media (max-width : 865px) {
+            width: 95%;
+        }
+    }
 
     @media (max-width : 980px) {
         width: 100%;
