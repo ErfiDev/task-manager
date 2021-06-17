@@ -7,6 +7,7 @@ import {
   Button,
 } from "@material-ui/core";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   const [data, setData] = useState({
@@ -60,7 +61,7 @@ const Login = () => {
             </InputAdornment>
           }
         />
-        <div>
+        <div style={{ marginBottom: "25px" }}>
           <Button
             style={{ marginRight: "15px" }}
             variant="contained"
@@ -73,6 +74,10 @@ const Login = () => {
             Clear
           </Button>
         </div>
+        <h5>
+          Don't have an account? &nbsp;
+          <Link to="/register">Sign Up</Link>
+        </h5>
       </form>
     </div>
   );
