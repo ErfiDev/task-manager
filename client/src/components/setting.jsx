@@ -1,5 +1,6 @@
 import React from "react";
 import { ChevronRight } from "@material-ui/icons";
+import { Button } from "@material-ui/core";
 
 const Dashboard = () => {
   return (
@@ -24,6 +25,9 @@ const Dashboard = () => {
           Change Username <ChevronRight />
         </li>
       </ul>
+      <Button variant="contained" color="secondary">
+        Logout
+      </Button>
     </div>
   );
 };

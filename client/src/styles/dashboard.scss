@@ -3,6 +3,7 @@
     min-height: 100vh;
     height: auto;
     @include Flex(center , center);
+    flex-direction: column;
     &-list{
         list-style: none;
         color: $fontColor;
