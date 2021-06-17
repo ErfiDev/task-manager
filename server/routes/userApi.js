@@ -6,12 +6,12 @@ const {
   addTask,
   editTask,
   deleteTask,
-  logout
+  logout,
 } = require("../controllers/userController");
 
 route.post("/register", register);
 route.post("/login", login);
-route.post("/logout/:uuid?" , logout);
+route.post("/logout/:uuid?", logout);
 route.post("/addTask/:uuid?", addTask);
 route.post("/editTask/:uuid?/:uuidTask?", editTask);
 route.post("/deleteTask/:uuid?/:uuidTask?", deleteTask);
