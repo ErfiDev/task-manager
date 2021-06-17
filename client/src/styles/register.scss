@@ -1,0 +1,18 @@
+.register{
+    width: 100%;
+    min-height: 80vh;
+    height: auto;
+    @include Flex(center , center);
+    flex-direction: column;
+    &-hi{
+        color: $fontColor;
+        margin-bottom: 35px;
+    }
+    &-form{
+        @include Flex(center , center);
+        flex-direction: column;
+        #{$bc}: rgba(255, 255, 255, 0.74);
+        padding: 50px;
+        border-radius: 8px;
+    }
+}
