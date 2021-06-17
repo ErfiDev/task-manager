@@ -9,7 +9,7 @@
         @include Flex(center , center);
         flex-direction: column;
         padding: 20px;
-        #{$bc}: rgba(255, 255, 255, 0.459);
+        #{$bc}: rgba(255, 255, 255, 0.74);
         border-radius: 8px;
         .MuiFormControl-root{
             margin: 10px;
