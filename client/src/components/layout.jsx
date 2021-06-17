@@ -2,8 +2,6 @@ import React from "react";
 import { Switch, Route } from "react-router-dom";
 import SideBar from "./sideBar";
 import Main from "./main";
-import Login from "./login";
-import Register from "./register";
 import Admin from "./admin";
 import Setting from "./setting";
 import Task from "./task";
@@ -16,15 +14,13 @@ const Layout = () => {
     <div className="layout">
       <SideBar />
       <Switch>
-        <Route path="/login" component={Login} />
-        <Route path="/register" component={Register} />
-        <Route path="/addTask" component={AddTask} />
-        <Route path="/allTasks" component={Tasks} />
-        <Route path="/task/:uuid" component={Task} />
-        <Route path="/setting" component={Setting} />
-        <Route path="/admin" component={Admin} />
+        <Route path="/user/:uuid/addTask" component={AddTask} />
+        <Route path="/user/:uuid/allTasks" component={Tasks} />
+        <Route path="/user/:uuid/task/:uuid" component={Task} />
+        <Route path="/user/:uuid/setting" component={Setting} />
+        <Route path="/user/:uuid/admin" component={Admin} />
         <Route
-          path="/account"
+          path="/user/:uuid/account"
           render={() => (
             <Account
               allTask={14}
@@ -33,7 +29,7 @@ const Layout = () => {
             />
           )}
         />
-        <Route path="/" exact component={Main} />
+        <Route path="/user/:uuid/" exact component={Main} />
       </Switch>
     </div>
   );

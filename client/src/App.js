@@ -1,14 +1,19 @@
 import React, { Fragment } from "react";
-import Header from "./components/header";
-import Layout from "./components/layout";
+import { Switch, Route } from "react-router-dom";
+import FullLayout from "./components/fullLayout";
 import Footer from "./components/footer";
+import Register from "./components/register";
+import Login from "./components/login";
 import "./styles/index.scss";
 
 const App = () => {
   return (
     <Fragment>
-      <Header />
-      <Layout />
+      <Switch>
+        <Route path="/user/:uuid" component={FullLayout} />
+        <Route path="/register" component={Register} />
+        <Route path="/" exact component={Login} />
+      </Switch>
       <Footer />
     </Fragment>
   );
