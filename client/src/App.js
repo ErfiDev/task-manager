@@ -6,11 +6,14 @@ import Register from "./components/register";
 import Login from "./components/login";
 import { ToastContainer } from "react-toastify";
 import jwt from "jsonwebtoken";
+import { useDispatch, useSelector } from "react-redux";
 import "react-toastify/dist/ReactToastify.css";
 import "./styles/index.scss";
 
 const App = () => {
   const [userStatus, setUserStatus] = useState(false);
+  const dis = useDispatch();
+  const user = useSelector((state) => state.user);
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token) {
@@ -22,9 +25,13 @@ const App = () => {
       if (!decode) {
         return setUserStatus(false);
       } else {
-        setUserStatus(true);
+        dis({ type: "SET_USER", payload: decode.payload });
+        setTimeout(() => {
+          setUserStatus(true);
+        }, 1000);
       }
     }
+    // eslint-disable-next-line
   }, []);
 
   return (
@@ -33,7 +40,11 @@ const App = () => {
         <Route path="/user/:uuid" component={FullLayout} />
         <Route path="/register" component={Register} />
         <Route path="/" exact>
-          {!userStatus ? <Login /> : <Redirect to="/user/erfan" />}
+          {!userStatus ? (
+            <Login />
+          ) : (
+            <Redirect to={`/user/${user.token.uuid}`} />
+          )}
         </Route>
       </Switch>
       <Footer />
