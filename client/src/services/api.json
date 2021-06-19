@@ -1,8 +1,9 @@
 {
   "registerApi": "http://localhost:5000/api/user/register",
   "loginApi": "http://localhost:5000/api/user/login",
-  "deleteAccApi": "http://localhost:5000/api/user/logout/",
-  "addTaskApi": "http://localhost:5000/api/user/addTask/",
-  "editTaskApi": "http://localhost:5000/api/user/editTask/",
-  "deleteTaskApi": "http://localhost:5000/api/user/deleteTask/"
+  "deleteAccApi": "http://localhost:5000/api/user/logout",
+  "addTaskApi": "http://localhost:5000/api/user/addTask",
+  "editTaskApi": "http://localhost:5000/api/user/editTask",
+  "deleteTaskApi": "http://localhost:5000/api/user/deleteTask",
+  "findTasks": "http://localhost:5000/api/user/getTasks"
 }

@@ -13,4 +13,8 @@ function deleteTask(uuid, uuidTask) {
   return httpService.post(`${Api.deleteTaskApi}/${uuid}/${uuidTask}`);
 }
 
-export { addTask, editTask, deleteTask };
+function getTasks(uuid) {
+  return httpService.post(`${Api.findTasks}/${uuid}`);
+}
+
+export { addTask, editTask, deleteTask, getTasks };
