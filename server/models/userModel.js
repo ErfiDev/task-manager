@@ -19,6 +19,7 @@ const userModel = new schema({
   ],
   uuid: { type: String, default: () => uuidv4() },
   isAdmin: { type: Boolean, required: true },
+  picture: { type: String, required: true },
 });
 
 module.exports = mongoose.model("user", userModel);
