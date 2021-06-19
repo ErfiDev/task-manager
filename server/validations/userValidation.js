@@ -16,7 +16,7 @@ const registerValidation = (data) => {
       })
     ),
     isAdmin: joi.boolean().required(),
-    picture: joi.string(),
+    picture: joi.string().required(),
   });
 
   return schema.validate(data);

@@ -31,6 +31,7 @@ async function register(req, res) {
       password: encryptPass,
       tasks: req.body.tasks,
       isAdmin: req.body.isAdmin,
+      picture: req.body.picture,
     };
     const data = await new model(body);
     data
