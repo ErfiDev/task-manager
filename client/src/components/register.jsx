@@ -5,6 +5,8 @@ import {
   InputAdornment,
   IconButton,
   Button,
+  Input,
+  InputLabel,
 } from "@material-ui/core";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
 import { Link, withRouter } from "react-router-dom";
@@ -17,7 +19,9 @@ const Register = ({ history }) => {
     username: "",
     toggle: false,
     fullname: "",
+    picture: "",
   });
+
   const handleChange = (prop) => (event) => {
     setData({ ...data, [prop]: event.target.value });
   };
@@ -25,15 +29,34 @@ const Register = ({ history }) => {
     return setData({ ...data, toggle: !data.toggle });
   }
   function clearInputs() {
-    return setData({ ...data, username: "", password: "", fullname: "" });
+    return setData({
+      ...data,
+      username: "",
+      password: "",
+      fullname: "",
+      picture: "",
+    });
+  }
+  function previewFile() {
+    const input = document.querySelector("input[type=file]").files[0];
+    const reader = new FileReader();
+    reader.addEventListener("load", async () => {
+      await setData({ ...data, picture: reader.result });
+    });
+    if (input) {
+      reader.readAsDataURL(input);
+    }
   }
   async function submit(e) {
     e.preventDefault();
+    console.log(data);
     try {
+      let picture = !data.picture ? "nothing" : data.picture;
       const info = {
         username: data.username,
         password: data.password,
         isAdmin: false,
+        picture,
       };
       const { data: response } = await registerUser(info);
       if (response.status === 201) {
@@ -98,6 +121,13 @@ const Register = ({ history }) => {
               </IconButton>
             </InputAdornment>
           }
+        />
+        <InputLabel>Your Profile photo</InputLabel>
+        <Input
+          style={{ marginBottom: "25px" }}
+          placeholder="Select your profile photo"
+          type="file"
+          onChange={previewFile}
         />
         <div style={{ marginBottom: "25px" }}>
           <Button
