@@ -282,6 +282,29 @@ async function logout(req, res) {
   }
 }
 
+async function getTasks(req, res) {
+  const { uuid } = req.params;
+  if (!uuid) {
+    return res.json({
+      status: 400,
+      msg: "please provide required params!",
+    });
+  } else {
+    const findByUu = await model.find({ uuid });
+    if (findByUu.length <= 0) {
+      return res.json({
+        status: 404,
+        msg: "can't find user with this uuid",
+      });
+    } else {
+      res.json({
+        status: 200,
+        tasks: findByUu[0].tasks,
+      });
+    }
+  }
+}
+
 module.exports = {
   register,
   login,
@@ -289,4 +312,5 @@ module.exports = {
   editTask,
   deleteTask,
   logout,
+  getTasks,
 };
