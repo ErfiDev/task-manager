@@ -8,7 +8,7 @@ const userRoutes = require("./routes/userApi");
 const App = express();
 const PORT = process.env.PORT || 5000;
 
-App.use(express.json());
+App.use(express.json({ limit: "25mb" }));
 App.use(cors());
 
 mongoose.connect(
