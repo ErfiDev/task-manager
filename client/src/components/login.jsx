@@ -36,8 +36,8 @@ const Login = () => {
       const { data: response } = await loginUser(info);
       if (response.status === 200) {
         let { token, exp } = response.data;
-        localStorage.setItem("token", token);
-        localStorage.setItem("exp", exp);
+        sessionStorage.setItem("token", token);
+        sessionStorage.setItem("exp", exp);
         setTimeout(() => {
           window.location.reload();
         }, 3000);

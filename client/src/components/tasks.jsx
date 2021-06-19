@@ -1,16 +1,18 @@
-import React from "react";
-import SingleTask from "./singleTask";
+import React, { Fragment } from "react";
+// import SingleTask from "./singleTask";
 
-const Tasks = () => {
+const Tasks = ({ match }) => {
+  // const [toggle, setToggle] = useState(false);
+
+  console.log(match);
   return (
-    <div className="tasks">
-      <SingleTask title="js learn sdafsdaf sdaf sadfsdaf sd fsdafadsf asdfdsfsad fsda fsdfsadf" />
-      <SingleTask title="js learn" time="2021-7-1" />
-      <SingleTask title="js learn" time="2021-7-1" />
-      <SingleTask title="js learn" time="2021-7-1" />
-      <SingleTask title="js learn" time="2021-7-1" />
-      <SingleTask title="js learn" time="2021-7-1" />
-    </div>
+    <Fragment>
+      <div className="tasks">
+        {/* {tasks.map((item) => (
+          <SingleTask title={item.title} time={item.endTime} />
+        ))} */}
+      </div>
+    </Fragment>
   );
 };
 

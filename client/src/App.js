@@ -15,12 +15,12 @@ const App = () => {
   const dis = useDispatch();
   const user = useSelector((state) => state.user);
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    const token = sessionStorage.getItem("token");
     if (!token) {
-      localStorage.setItem("token", "");
+      sessionStorage.setItem("token", "");
       return setUserStatus(false);
     } else {
-      let read = localStorage.getItem("token");
+      let read = sessionStorage.getItem("token");
       let decode = jwt.decode(read, { complete: true });
       if (!decode) {
         return setUserStatus(false);

@@ -19,16 +19,7 @@ const Layout = () => {
         <Route path="/user/:uuid/task/:uuid" component={Task} />
         <Route path="/user/:uuid/setting" component={Setting} />
         <Route path="/user/:uuid/admin" component={Admin} />
-        <Route
-          path="/user/:uuid/account"
-          render={() => (
-            <Account
-              allTask={14}
-              joinedDate="2021,4,10"
-              username="erfanHanifezade"
-            />
-          )}
-        />
+        <Route path="/user/:uuid/account" component={Account} />
         <Route path="/user/:uuid/" exact component={Main} />
       </Switch>
     </div>
