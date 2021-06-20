@@ -70,21 +70,19 @@ async function login(req, res) {
           status: 406,
         });
       }
-
-      const today = new Date();
-      const tomorrow = new Date(today);
-      tomorrow.setDate(today.getDate() + 1);
-
-      const token = await jwt.sign(
-        { token: findByUser },
-        process.env.ACCESS_TOKEN
-      );
+      const edit = {
+        username: findByUser.username,
+        uuid: findByUser.uuid,
+        isAdmin: findByUser.isAdmin,
+        joinedDate: findByUser.joinedDate,
+        tasks: findByUser.tasks,
+      };
+      const token = await jwt.sign({ token: edit }, process.env.ACCESS_TOKEN);
 
       res.json({
         status: 200,
         data: {
           token,
-          exp: tomorrow,
         },
       });
     }
