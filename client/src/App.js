@@ -11,7 +11,7 @@ import "react-toastify/dist/ReactToastify.css";
 import "./styles/index.scss";
 
 const App = () => {
-  const [userStatus, setUserStatus] = useState(false);
+  const [userStatus, setUserStatus] = useState();
   const dis = useDispatch();
   const user = useSelector((state) => state.user);
   useEffect(() => {
