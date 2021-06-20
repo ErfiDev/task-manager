@@ -304,6 +304,28 @@ async function getTasks(req, res) {
   }
 }
 
+async function getUserPicture(req, res) {
+  const { uuid } = req.params;
+  if (!uuid) {
+    return res.json({
+      status: 400,
+      msg: "please complete required params",
+    });
+  } else {
+    let findUser = await model.find({ uuid });
+    if (findUser.length <= 0) {
+      return res.json({
+        msg: "can't find user with this uuid",
+        status: 404,
+      });
+    }
+    res.json({
+      status: 200,
+      base64: findUser[0].picture,
+    });
+  }
+}
+
 module.exports = {
   register,
   login,
@@ -312,4 +334,5 @@ module.exports = {
   deleteTask,
   logout,
   getTasks,
+  getUserPicture,
 };
