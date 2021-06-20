@@ -7,6 +7,7 @@ import Login from "./components/login";
 import { ToastContainer } from "react-toastify";
 import jwt from "jsonwebtoken";
 import { useDispatch, useSelector } from "react-redux";
+import NotFound from "./components/404";
 import "react-toastify/dist/ReactToastify.css";
 import "./styles/index.scss";
 
@@ -52,6 +53,7 @@ const App = () => {
         <Route path="/" exact>
           {!userStatus ? <Login /> : <Redirect to={`/user/${user.uuid}`} />}
         </Route>
+        <Route path="*" component={NotFound} />
       </Switch>
       <Footer />
       <ToastContainer />
