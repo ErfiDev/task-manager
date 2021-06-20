@@ -136,7 +136,7 @@ const Register = ({ history }) => {
             color="primary"
             type="submit"
           >
-            Login
+            Register
           </Button>
           <Button onClick={clearInputs} variant="contained" color="secondary">
             Clear
