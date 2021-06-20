@@ -41,7 +41,13 @@ const Register = ({ history }) => {
     const input = document.querySelector("input[type=file]").files[0];
     const reader = new FileReader();
     reader.addEventListener("load", async () => {
-      await setData({ ...data, picture: reader.result });
+      if (input.size > 1000000) {
+        const inputS = document.querySelector("input[type=file]");
+        inputS.value = "";
+        return alert("image size is higher than 1 mb");
+      } else {
+        await setData({ ...data, picture: reader.result });
+      }
     });
     if (input) {
       reader.readAsDataURL(input);
@@ -49,7 +55,6 @@ const Register = ({ history }) => {
   }
   async function submit(e) {
     e.preventDefault();
-    console.log(data);
     try {
       let picture = !data.picture ? "nothing" : data.picture;
       const info = {
@@ -128,6 +133,7 @@ const Register = ({ history }) => {
           placeholder="Select your profile photo"
           type="file"
           onChange={previewFile}
+          className="type-file"
         />
         <div style={{ marginBottom: "25px" }}>
           <Button

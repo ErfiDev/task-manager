@@ -14,25 +14,35 @@ const App = () => {
   const [userStatus, setUserStatus] = useState();
   const dis = useDispatch();
   const user = useSelector((state) => state.user);
+
   useEffect(() => {
-    const token = sessionStorage.getItem("token");
-    if (!token) {
-      sessionStorage.setItem("token", "");
+    status();
+  }, []);
+
+  async function status() {
+    const loggedIn = localStorage.getItem("loggedIn");
+    if (!loggedIn || loggedIn == 0) {
+      localStorage.setItem("token", "");
+      localStorage.setItem("loggedIn", 0);
       return setUserStatus(false);
-    } else {
-      let read = sessionStorage.getItem("token");
-      let decode = jwt.decode(read, { complete: true });
-      if (!decode) {
+    }
+    if (loggedIn == 1) {
+      let now = Date.now();
+      let exp = localStorage.getItem("exp");
+      if (now > exp) {
         return setUserStatus(false);
       } else {
-        dis({ type: "SET_USER", payload: decode.payload });
-        setTimeout(() => {
-          setUserStatus(true);
-        }, 1000);
+        const token = await localStorage.getItem("token");
+        if (!token) {
+          return setUserStatus(false);
+        } else {
+          let { payload } = await jwt.decode(token, { complete: true });
+          await dis({ type: "SET_USER", payload: payload.token });
+          return setUserStatus(true);
+        }
       }
     }
-    // eslint-disable-next-line
-  }, []);
+  }
 
   return (
     <Fragment>
@@ -40,11 +50,7 @@ const App = () => {
         <Route path="/user/:uuid" component={FullLayout} />
         <Route path="/register" component={Register} />
         <Route path="/" exact>
-          {!userStatus ? (
-            <Login />
-          ) : (
-            <Redirect to={`/user/${user.token.uuid}`} />
-          )}
+          {!userStatus ? <Login /> : <Redirect to={`/user/${user.uuid}`} />}
         </Route>
       </Switch>
       <Footer />

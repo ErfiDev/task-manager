@@ -7,11 +7,12 @@ import {
   Button,
 } from "@material-ui/core";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import { loginUser } from "../services/userService";
 import { toast } from "react-toastify";
+import jwt from "jsonwebtoken";
 
-const Login = () => {
+const Login = ({ history }) => {
   const [data, setData] = useState({
     password: "",
     username: "",
@@ -36,10 +37,11 @@ const Login = () => {
       const { data: response } = await loginUser(info);
       if (response.status === 200) {
         let { token } = response.data;
-        sessionStorage.setItem("token", token);
-        setTimeout(() => {
-          window.location.reload();
-        }, 3000);
+        const { payload } = await jwt.decode(token, { complete: true });
+        localStorage.setItem("token", token);
+        localStorage.setItem("exp", payload.exp);
+        localStorage.setItem("loggedIn", 1);
+        history.push(`/user/${payload.token.uuid}`);
         return toast.success("Login successfull!", {
           position: "bottom-left",
           closeOnClick: true,
@@ -109,4 +111,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default withRouter(Login);

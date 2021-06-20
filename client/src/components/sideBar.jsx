@@ -11,8 +11,7 @@ import { sideBar } from "../utils/utils";
 import { useSelector } from "react-redux";
 
 const SideBar = () => {
-  const { token } = useSelector((state) => state.user);
-  const { uuid } = token;
+  const { uuid } = useSelector((state) => state.user);
 
   return (
     <div className="side-bar">
