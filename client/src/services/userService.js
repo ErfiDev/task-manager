@@ -13,4 +13,8 @@ function logoutUser(uuid) {
   return httpService.post(`${Api.deleteAccApi}/${uuid}`);
 }
 
-export { loginUser, registerUser, logoutUser };
+function getPicture(uuid) {
+  return httpService.get(`${Api.findPicture}/${uuid}`);
+}
+
+export { loginUser, registerUser, logoutUser, getPicture };

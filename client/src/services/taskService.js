@@ -14,7 +14,7 @@ function deleteTask(uuid, uuidTask) {
 }
 
 function getTasks(uuid) {
-  return httpService.post(`${Api.findTasks}/${uuid}`);
+  return httpService.get(`${Api.findTasks}/${uuid}`);
 }
 
 export { addTask, editTask, deleteTask, getTasks };
