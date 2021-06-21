@@ -284,20 +284,20 @@ async function getTasks(req, res) {
   const { uuid } = req.params;
   if (!uuid) {
     return res.json({
+      msg: "please complete required params",
       status: 400,
-      msg: "please provide required params!",
     });
   } else {
-    const findByUu = await model.find({ uuid });
-    if (findByUu.length <= 0) {
+    const find = await model.findOne({ uuid }, { tasks: 1, _id: 0 });
+    if (!find) {
       return res.json({
+        msg: "can't find with this uuid",
         status: 404,
-        msg: "can't find user with this uuid",
       });
     } else {
       res.json({
+        tasks: find.tasks,
         status: 200,
-        tasks: findByUu[0].tasks,
       });
     }
   }
@@ -325,29 +325,6 @@ async function getUserPicture(req, res) {
   }
 }
 
-async function taskStatus(req, res) {
-  const { uuid } = req.params;
-  if (!uuid) {
-    return res.json({
-      msg: "please complete required params",
-      status: 400,
-    });
-  } else {
-    const find = await model.findOne({ uuid }, { tasks: 1, _id: 0 });
-    if (!find) {
-      return res.json({
-        msg: "can't find with this uuid",
-        status: 404,
-      });
-    } else {
-      res.json({
-        tasks: find.tasks,
-        status: 200,
-      });
-    }
-  }
-}
-
 module.exports = {
   register,
   login,
@@ -357,5 +334,4 @@ module.exports = {
   logout,
   getTasks,
   getUserPicture,
-  taskStatus,
 };
