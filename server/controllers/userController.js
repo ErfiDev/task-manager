@@ -189,7 +189,8 @@ async function editTask(req, res) {
             return updateTask(allTasks, filterOne, uuid)
               .then((response) => res.json(response))
               .catch((er) => res.json(er));
-          } else {
+          }
+          if (status && !title && !endTime) {
             filterOne.status = status;
             return updateTask(allTasks, filterOne, uuid)
               .then((r) => res.json(r))
@@ -325,6 +326,27 @@ async function getUserPicture(req, res) {
   }
 }
 
+async function getSpecificTask(req, res) {
+  const { uuid, uuidTask } = req.params;
+  if (!uuid || !uuidTask) {
+    return res.json({
+      status: 400,
+      msg: "please provide requireds params",
+    });
+  } else {
+    let find = await model.findOne({ uuid }, { tasks: 1, _id: 0 });
+    if (!find) {
+      res.json({
+        msg: "can't find user with this uuid",
+        status: 404,
+      });
+    } else {
+      let filter = await find.tasks.filter((item) => item.uuid === uuidTask)[0];
+      res.json(filter);
+    }
+  }
+}
+
 module.exports = {
   register,
   login,
@@ -334,4 +356,5 @@ module.exports = {
   logout,
   getTasks,
   getUserPicture,
+  getSpecificTask,
 };

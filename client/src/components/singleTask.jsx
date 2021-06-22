@@ -5,9 +5,10 @@ import Task from "../services/taskService";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 
-const SingleTask = ({ title, time, uuidTask, uuid }) => {
+const SingleTask = ({ title, time, uuidTask, uuid, status }) => {
   const tasks = useSelector((state) => state.tasks);
   const dis = useDispatch();
+
   let date = new Date(time);
   let year = date.getFullYear();
   let month = date.getMonth() + 1;
@@ -19,13 +20,11 @@ const SingleTask = ({ title, time, uuidTask, uuid }) => {
     (hour < "9" ? "0" : "") + hour,
     (minute < "9" ? "0" : "") + minute,
   ].join(":");
-
   let finalDate = [
     year,
     (month < "9" ? "0" : "") + month,
     (day < "9" ? "0" : "") + day,
   ].join("-");
-
   let final = [finalDate, finalTime].join(" - - ");
 
   async function deleteTask(uuidT) {
@@ -51,9 +50,10 @@ const SingleTask = ({ title, time, uuidTask, uuid }) => {
 
   async function completeTask(uuUser, uuTask) {
     try {
-      let { data } = await Task.editTask(uuUser, uuTask);
+      let { data } = await Task.editTask(uuUser, uuTask, { status: true });
       if (data.status === 200) {
-        return toast.info(data.msg, {
+        updateTask(uuUser, uuTask);
+        return toast.info("Task Completed", {
           position: "bottom-right",
           closeOnClick: true,
         });
@@ -68,14 +68,25 @@ const SingleTask = ({ title, time, uuidTask, uuid }) => {
     }
   }
 
+  async function updateTask(user, task) {
+    let { data } = await Task.getSpecificTask(user, task);
+    let filter = await tasks.filter((item) => item.uuid !== task);
+    await filter.push(data);
+    dis({ type: "SET_TASKS", payload: filter });
+  }
+
   return (
-    <div className="single-task">
+    <div
+      id={uuidTask}
+      className={status ? "completed-task single-task" : "single-task"}
+    >
       <h1 className="single-task-title">{title}</h1>
       <h5 style={{ marginTop: "10px" }} className="single-task-time">
         {final}
       </h5>
       <div className="single-task-status-container">
         <Button
+          className={status ? "off-btn-task" : ""}
           onClick={() => completeTask(uuid, uuidTask)}
           variant="contained"
           color="primary"
@@ -83,6 +94,7 @@ const SingleTask = ({ title, time, uuidTask, uuid }) => {
           <Done color="inherit" />
         </Button>
         <Button
+          className="single-task-btn-close"
           style={{ marginLeft: "10px" }}
           variant="contained"
           color="secondary"

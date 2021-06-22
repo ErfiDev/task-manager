@@ -6,8 +6,11 @@ class Task {
     return httpService.post(`${Api.addTaskApi}/${uuid}`, JSON.stringify(data));
   }
 
-  editTask(uuid, uuidTask) {
-    return httpService.post(`${Api.editTaskApi}/${uuid}/${uuidTask}`);
+  editTask(uuid, uuidTask, data) {
+    return httpService.post(
+      `${Api.editTaskApi}/${uuid}/${uuidTask}`,
+      JSON.stringify(data)
+    );
   }
 
   deleteTask(uuid, uuidTask) {
@@ -16,6 +19,10 @@ class Task {
 
   getTasks(uuid) {
     return httpService.get(`${Api.findTasks}/${uuid}`);
+  }
+
+  getSpecificTask(uuid, uuidTask) {
+    return httpService.get(`${Api.specificTask}/${uuid}/${uuidTask}`);
   }
 }
 

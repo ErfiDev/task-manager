@@ -35,6 +35,7 @@ const Tasks = ({ match }) => {
               title={item.title}
               time={item.endTime}
               uuid={match.params.uuid}
+              status={item.status}
             />
           ))}
         </div>

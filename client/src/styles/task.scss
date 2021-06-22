@@ -40,6 +40,13 @@
     @include Flex(space-around , flex-start);
     flex-wrap: wrap;
     padding: 10px;
+    .completed-task{
+        border: solid 3px rgba(255, 255, 255, 0.226) !important;
+        color: rgba(255, 255, 255, 0.226) !important;
+    }
+    .off-btn-task{
+        display: none !important;
+    }
     .single-task{
         width: 45%;
         min-height: 250px;

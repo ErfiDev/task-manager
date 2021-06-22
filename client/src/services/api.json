@@ -6,5 +6,6 @@
   "editTaskApi": "http://localhost:5000/api/user/editTask",
   "deleteTaskApi": "http://localhost:5000/api/user/deleteTask",
   "findTasks": "http://localhost:5000/api/user/getTasks",
-  "findPicture": "http://localhost:5000/api/user/getUserPicture"
+  "findPicture": "http://localhost:5000/api/user/getUserPicture",
+  "specificTask": "http://localhost:5000/api/user/getSpecificTask"
 }
