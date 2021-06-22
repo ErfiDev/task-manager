@@ -31,6 +31,9 @@ const App = () => {
       let now = Date.now();
       let exp = localStorage.getItem("exp");
       if (now > exp) {
+        localStorage.removeItem("token");
+        localStorage.removeItem("exp");
+        localStorage.removeItem("loggedIn");
         return setUserStatus(false);
       } else {
         const token = await localStorage.getItem("token");

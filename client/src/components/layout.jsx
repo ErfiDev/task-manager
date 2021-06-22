@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Switch, Route } from "react-router-dom";
 import SideBar from "./sideBar";
 import Main from "./main";
@@ -8,8 +8,28 @@ import Task from "./task";
 import Tasks from "./tasks";
 import AddTask from "./addTask";
 import Account from "./account";
+import { useSelector, useDispatch } from "react-redux";
+import jwt from "jsonwebtoken";
 
 const Layout = () => {
+  const user = useSelector((state) => state.user);
+  const dis = useDispatch();
+
+  useEffect(() => {
+    async function fixUserReducer() {
+      if (Object.keys(user).length === 0) {
+        let readToken = localStorage.getItem("token");
+        let { payload } = await jwt.decode(readToken, { complete: true });
+        return dis({ type: "SET_USER", payload: payload.token });
+      } else {
+        return null;
+      }
+    }
+
+    fixUserReducer();
+    // eslint-disable-next-line
+  }, []);
+
   return (
     <div className="layout">
       <SideBar />
