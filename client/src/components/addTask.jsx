@@ -36,12 +36,12 @@ const AddTask = ({ match }) => {
         setTitle("");
         setTime("");
         return toast.success(res.msg, {
-          position: "bottom-left",
+          position: "bottom-right",
           closeOnClick: true,
         });
       } else {
         toast.error(res.msg, {
-          position: "bottom-left",
+          position: "bottom-right",
           closeOnClick: true,
         });
       }

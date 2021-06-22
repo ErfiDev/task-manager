@@ -45,12 +45,12 @@ const Login = ({ history }) => {
           history.push(`/user/${payload.token.uuid}`);
         }, 3000);
         return toast.success("Login successfull!", {
-          position: "bottom-left",
+          position: "bottom-right",
           closeOnClick: true,
         });
       } else {
         toast.error(response.msg, {
-          position: "bottom-left",
+          position: "bottom-right",
           closeOnClick: true,
         });
       }

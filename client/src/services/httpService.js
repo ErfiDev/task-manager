@@ -10,7 +10,7 @@ axios.interceptors.response.use(null, (error) => {
     error.response.status < 500;
   if (!expectedError) {
     toast("There is a problem with the server", {
-      position: "bottom-left",
+      position: "bottom-right",
       closeOnClick: true,
     });
   }

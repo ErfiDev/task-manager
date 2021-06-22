@@ -68,17 +68,17 @@ const Register = ({ history }) => {
         setTimeout(() => {
           history.push("/");
           toast("please login", {
-            position: "bottom-left",
+            position: "bottom-right",
             closeOnClick: true,
           });
         }, 3000);
         return toast.success("register successfull!", {
-          position: "bottom-left",
+          position: "bottom-right",
           closeOnClick: true,
         });
       } else {
         toast.error(response.msg, {
-          position: "bottom-left",
+          position: "bottom-right",
           closeOnClick: true,
         });
       }

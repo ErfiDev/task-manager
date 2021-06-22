@@ -1,17 +1,44 @@
-import React, { Fragment } from "react";
-// import SingleTask from "./singleTask";
+import React, { Fragment, useEffect } from "react";
+import { toast } from "react-toastify";
+import { useDispatch, useSelector } from "react-redux";
+import Task from "../services/taskService";
+import SingleTask from "./singleTask";
 
 const Tasks = ({ match }) => {
-  // const [toggle, setToggle] = useState(false);
+  const tasks = useSelector((state) => state.tasks);
+  const dis = useDispatch();
+  useEffect(() => {
+    async function get() {
+      let { data } = await Task.getTasks(match.params.uuid);
+      if (data.status === 200) {
+        return dis({ type: "SET_TASKS", payload: data.tasks });
+      } else {
+        toast.error("can't get tasks", {
+          position: "bottom-right",
+          closeOnClick: true,
+        });
+      }
+    }
+    get();
+    // eslint-disable-next-line
+  }, []);
 
-  console.log(match);
   return (
     <Fragment>
-      <div className="tasks">
-        {/* {tasks.map((item) => (
-          <SingleTask title={item.title} time={item.endTime} />
-        ))} */}
-      </div>
+      {tasks.length < 0 ? (
+        "Nothing"
+      ) : (
+        <div className="tasks">
+          {tasks.map((item) => (
+            <SingleTask
+              uuidTask={item.uuid}
+              title={item.title}
+              time={item.endTime}
+              uuid={match.params.uuid}
+            />
+          ))}
+        </div>
+      )}
     </Fragment>
   );
 };
