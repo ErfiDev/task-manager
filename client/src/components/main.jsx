@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getTasks } from "../services/taskService";
+import taskService from "../services/taskService";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
@@ -11,7 +11,7 @@ const Main = ({ match }) => {
 
   useEffect(() => {
     async function get() {
-      const res = await getTasks(match.params.uuid);
+      const res = await taskService.getTasks(match.params.uuid);
       return setTasks(res.data.tasks);
     }
     get();

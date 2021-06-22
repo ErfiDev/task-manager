@@ -10,7 +10,7 @@ import {
 } from "@material-ui/core";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
 import { Link, withRouter } from "react-router-dom";
-import { registerUser } from "../services/userService";
+import User from "../services/userService";
 import { toast } from "react-toastify";
 
 const Register = ({ history }) => {
@@ -63,7 +63,7 @@ const Register = ({ history }) => {
         isAdmin: false,
         picture,
       };
-      const { data: response } = await registerUser(info);
+      const { data: response } = await User.registerUser(info);
       if (response.status === 201) {
         setTimeout(() => {
           history.push("/");

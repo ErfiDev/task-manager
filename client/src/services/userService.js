@@ -1,20 +1,22 @@
 import Api from "./api.json";
 import httpService from "./httpService";
 
-function loginUser(data) {
-  return httpService.post(Api.loginApi, JSON.stringify(data));
+class User {
+  loginUser(data) {
+    return httpService.post(Api.loginApi, JSON.stringify(data));
+  }
+
+  registerUser(data) {
+    return httpService.post(Api.registerApi, JSON.stringify(data));
+  }
+
+  logoutUser(uuid) {
+    return httpService.post(`${Api.deleteAccApi}/${uuid}`);
+  }
+
+  getPicture(uuid) {
+    return httpService.get(`${Api.findPicture}/${uuid}`);
+  }
 }
 
-function registerUser(data) {
-  return httpService.post(Api.registerApi, JSON.stringify(data));
-}
-
-function logoutUser(uuid) {
-  return httpService.post(`${Api.deleteAccApi}/${uuid}`);
-}
-
-function getPicture(uuid) {
-  return httpService.get(`${Api.findPicture}/${uuid}`);
-}
-
-export { loginUser, registerUser, logoutUser, getPicture };
+export default new User();

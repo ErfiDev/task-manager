@@ -8,7 +8,7 @@ import {
 } from "@material-ui/core";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
 import { Link, withRouter } from "react-router-dom";
-import { loginUser } from "../services/userService";
+import User from "../services/userService";
 import { toast } from "react-toastify";
 import jwt from "jsonwebtoken";
 
@@ -34,7 +34,7 @@ const Login = ({ history }) => {
         username: data.username,
         password: data.password,
       };
-      const { data: response } = await loginUser(info);
+      const { data: response } = await User.loginUser(info);
       if (response.status === 200) {
         let { token } = response.data;
         const { payload } = await jwt.decode(token, { complete: true });
