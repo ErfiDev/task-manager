@@ -1,24 +1,20 @@
-import React, { useEffect, useState } from "react";
-import taskService from "../services/taskService";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import FilterTasksAction from "../actions/filterTasksAction";
 
 const Main = ({ match }) => {
-  const [tasks, setTasks] = useState([]);
-  const [completedTasks, setCompletedTasks] = useState([]);
-  const [UncompletedTasks, setUnCompletedTasks] = useState([]);
   const { username } = useSelector((state) => state.user);
+  const { complete, unComplete, all } = useSelector(
+    (state) => state.FilterTasks
+  );
+  const dis = useDispatch();
 
   useEffect(() => {
-    async function get() {
-      const res = await taskService.getTasks(match.params.uuid);
-      return setTasks(res.data.tasks);
+    function get() {
+      dis(FilterTasksAction(match.params.uuid));
     }
     get();
-    let filterCompleted = tasks.filter((item) => item.status === true);
-    let filterUnCompleted = tasks.filter((item) => item.status === false);
-    setCompletedTasks(filterCompleted);
-    setUnCompletedTasks(filterUnCompleted);
     // eslint-disable-next-line
   }, []);
 
@@ -26,9 +22,9 @@ const Main = ({ match }) => {
     <div className="main">
       <h1 className="main-h1">Welcome {username}!</h1>
       <ul className="main-list">
-        <li>Your All Tasks {tasks.length}</li>
-        <li>Your Completed Tasks {completedTasks.length}</li>
-        <li>Your UnCompleted Tasks {UncompletedTasks.length}</li>
+        <li>Your All Tasks : {all}</li>
+        <li>Your Completed Tasks : {complete}</li>
+        <li>Your UnCompleted Tasks : {unComplete}</li>
       </ul>
       <Link className="main-link" to={`/user/${match.params.uuid}/addTask`}>
         Add Task
