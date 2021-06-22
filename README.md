@@ -21,7 +21,8 @@ this project is a simple practice to grow up skills and problem-solving
 ## step 3
 create a MongoDB database in locally or.....
 and open server directory and create .env file 
-and put the database URL to DB variable
+and put the database URL to DB variable then create a ACCESS_TOKEN 
+variable then put the secur word for using on the jwt
 
 
 
