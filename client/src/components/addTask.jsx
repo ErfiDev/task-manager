@@ -13,13 +13,23 @@ const AddTask = ({ match }) => {
     let year = now.getFullYear();
     let month = now.getMonth() + 1;
     let day = now.getDate();
-    setDate(
-      [
-        year,
-        (month < "9" ? "0" : "") + month,
-        (day < "9" ? "0" : "") + day,
-      ].join("-")
-    );
+    let hour = now.getHours();
+    let minute = now.getMinutes();
+
+    let finalTime = [
+      (hour < "9" ? "0" : "") + hour,
+      (minute < "9" ? "0" : "") + minute,
+    ].join(":");
+
+    let finalDate = [
+      year,
+      (month < "9" ? "0" : "") + month,
+      (day < "9" ? "0" : "") + day,
+    ].join("-");
+
+    let final = [finalDate, finalTime];
+
+    setDate(final.join("T"));
   }, []);
 
   async function submit(e) {
@@ -63,7 +73,7 @@ const AddTask = ({ match }) => {
         />
         <label style={{ marginTop: "20px" }}>Set a Timer</label>
         <input
-          type="date"
+          type="datetime-local"
           onChange={(e) => setTime(e.target.value)}
           min={date}
           value={time}

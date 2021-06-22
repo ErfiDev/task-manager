@@ -8,6 +8,25 @@ import { useDispatch, useSelector } from "react-redux";
 const SingleTask = ({ title, time, uuidTask, uuid }) => {
   const tasks = useSelector((state) => state.tasks);
   const dis = useDispatch();
+  let date = new Date(time);
+  let year = date.getFullYear();
+  let month = date.getMonth() + 1;
+  let day = date.getDate();
+  let hour = date.getHours();
+  let minute = date.getMinutes();
+
+  let finalTime = [
+    (hour < "9" ? "0" : "") + hour,
+    (minute < "9" ? "0" : "") + minute,
+  ].join(":");
+
+  let finalDate = [
+    year,
+    (month < "9" ? "0" : "") + month,
+    (day < "9" ? "0" : "") + day,
+  ].join("-");
+
+  let final = [finalDate, finalTime].join(" - - ");
 
   async function deleteTask(uuidT) {
     try {
@@ -30,14 +49,37 @@ const SingleTask = ({ title, time, uuidTask, uuid }) => {
     }
   }
 
+  async function completeTask(uuUser, uuTask) {
+    try {
+      let { data } = await Task.editTask(uuUser, uuTask);
+      if (data.status === 200) {
+        return toast.info(data.msg, {
+          position: "bottom-right",
+          closeOnClick: true,
+        });
+      } else {
+        return toast.error(data.msg, {
+          position: "bottom-right",
+          closeOnClick: true,
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <div className="single-task">
       <h1 className="single-task-title">{title}</h1>
       <h5 style={{ marginTop: "10px" }} className="single-task-time">
-        {!time ? "Timer doesn't set" : time + " - 12:00"}
+        {final}
       </h5>
       <div className="single-task-status-container">
-        <Button variant="contained" color="primary">
+        <Button
+          onClick={() => completeTask(uuid, uuidTask)}
+          variant="contained"
+          color="primary"
+        >
           <Done color="inherit" />
         </Button>
         <Button
