@@ -41,7 +41,9 @@ const Login = ({ history }) => {
         localStorage.setItem("token", token);
         localStorage.setItem("exp", payload.exp);
         localStorage.setItem("loggedIn", 1);
-        history.push(`/user/${payload.token.uuid}`);
+        setTimeout(() => {
+          history.push(`/user/${payload.token.uuid}`);
+        }, 3000);
         return toast.success("Login successfull!", {
           position: "bottom-left",
           closeOnClick: true,
