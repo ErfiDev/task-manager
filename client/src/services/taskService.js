@@ -2,8 +2,8 @@ import Api from "./api.json";
 import httpService from "./httpService";
 
 class Task {
-  addTask(uuid) {
-    return httpService.post(`${Api.addTaskApi}/${uuid}`);
+  addTask(uuid, data) {
+    return httpService.post(`${Api.addTaskApi}/${uuid}`, JSON.stringify(data));
   }
 
   editTask(uuid, uuidTask) {
