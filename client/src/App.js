@@ -1,5 +1,4 @@
 import React, { Fragment, useEffect, useState } from "react";
-import { Switch, Route, Redirect } from "react-router-dom";
 import jwt from "jsonwebtoken";
 import { useDispatch, useSelector } from "react-redux";
 import AppLayout from "./App.layout";
@@ -14,55 +13,58 @@ const App = () => {
   const user = useSelector((state) => state.user);
 
   useEffect(() => {
-    status();
-  }, []);
-
-  async function status() {
-    const loggedIn = localStorage.getItem("loggedIn");
-    if (!loggedIn || loggedIn == 0) {
-      localStorage.setItem("token", "");
-      localStorage.setItem("loggedIn", 0);
-      setTimeout(() => {
-        setTimeToggle(false);
-      }, 2500);
-      return setUserStatus(false);
-    }
-    if (loggedIn == 1) {
-      let now = Date.now();
-      let exp = localStorage.getItem("exp");
-      if (now > exp) {
-        localStorage.removeItem("token");
-        localStorage.removeItem("exp");
-        localStorage.removeItem("loggedIn");
+    async function status() {
+      const loggedIn = localStorage.getItem("loggedIn");
+      // eslint-disable-next-line
+      if (!loggedIn || loggedIn == 0) {
+        localStorage.setItem("token", "");
+        localStorage.setItem("loggedIn", 0);
         setTimeout(() => {
           setTimeToggle(false);
         }, 2500);
         return setUserStatus(false);
-      } else {
-        const token = await localStorage.getItem("token");
-        if (!token) {
+      }
+      // eslint-disable-next-line
+      if (loggedIn == 1) {
+        let now = Date.now();
+        let exp = localStorage.getItem("exp");
+        if (now > exp) {
+          localStorage.removeItem("token");
+          localStorage.removeItem("exp");
+          localStorage.removeItem("loggedIn");
           setTimeout(() => {
             setTimeToggle(false);
           }, 2500);
           return setUserStatus(false);
         } else {
-          let decode = await jwt.decode(token, { complete: true });
-          if (!decode) {
+          const token = await localStorage.getItem("token");
+          if (!token) {
             setTimeout(() => {
               setTimeToggle(false);
             }, 2500);
-            return userStatus(false);
+            return setUserStatus(false);
           } else {
-            await dis({ type: "SET_USER", payload: decode.payload.token });
-            setTimeout(() => {
-              setTimeToggle(false);
-            }, 2500);
-            return setUserStatus(true);
+            let decode = await jwt.decode(token, { complete: true });
+            if (!decode) {
+              setTimeout(() => {
+                setTimeToggle(false);
+              }, 2500);
+              return userStatus(false);
+            } else {
+              await dis({ type: "SET_USER", payload: decode.payload.token });
+              setTimeout(() => {
+                setTimeToggle(false);
+              }, 2500);
+              return setUserStatus(true);
+            }
           }
         }
       }
     }
-  }
+
+    status();
+    // eslint-disable-next-line
+  }, []);
 
   return (
     <Fragment>

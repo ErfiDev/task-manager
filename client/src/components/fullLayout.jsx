@@ -23,6 +23,7 @@ const FullLayout = ({ history, match }) => {
     }
 
     auth();
+    // eslint-disable-next-line
   }, []);
 
   return (
