@@ -5,6 +5,7 @@ import {
   Person,
   Assignment,
   AddCircle,
+  Home,
 } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import { sideBar } from "../utils/utils";
@@ -41,6 +42,12 @@ const SideBar = () => {
           <Link to={`/user/${uuid}/setting`}>
             <Settings fontSize="inherit" color="inherit" />
             &nbsp; Setting
+          </Link>
+        </li>
+        <li className="side-bar-ul-li" onClick={() => sideBar(false)}>
+          <Link to={`/user/${uuid}`}>
+            <Home fontSize="inherit" color="inherit" />
+            &nbsp; Go Home
           </Link>
         </li>
       </ul>
