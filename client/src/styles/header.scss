@@ -3,9 +3,10 @@
     width: 100%;
     min-height: 80px;
     height: auto;
-    #{$bc}: rgba(255, 255, 255, 0.041);
-    backdrop-filter: blur( 2.5px );
-    -webkit-backdrop-filter: blur( 2.5px );
+    #{$bc}: #1b1b1b62;
+    backdrop-filter: blur( 5.0px );
+    -webkit-backdrop-filter: blur( 5.0px );
+    z-index: 60000;
 
     &-hamburger{
         margin-left: 50px;
