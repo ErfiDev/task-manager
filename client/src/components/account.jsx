@@ -1,18 +1,28 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import FilterTasksAction from "../actions/filterTasksAction";
 
 const Account = ({ match }) => {
   const {
     joinedDate: join,
     username,
-    tasks,
     picture,
   } = useSelector((state) => state.user);
+  const tasks = useSelector((state) => state.FilterTasks);
+  const dis = useDispatch();
   let date = new Date(join);
   let year = date.getFullYear();
   let month = date.getMonth() + 1;
   let day = date.getDate();
   let joinedDate = [year, month, day].join("-");
+
+  useEffect(() => {
+    function get() {
+      dis(FilterTasksAction(match.params.uuid));
+    }
+    get();
+    // eslint-disable-next-line
+  }, []);
 
   return (
     <div className="account">
@@ -33,7 +43,7 @@ const Account = ({ match }) => {
       <ul className="user-info">
         <li className="user-info-option info-1">{username}</li>
         <li className="user-info-option info-2">{joinedDate}</li>
-        <li className="user-info-option info-3">{tasks.length}</li>
+        <li className="user-info-option info-3">{tasks.all}</li>
       </ul>
     </div>
   );
