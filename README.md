@@ -4,7 +4,7 @@ this project is a simple practice to grow up skills and problem-solving
 
 ## step 1
 ```
-    git clone '..............'
+    git clone https://github.com/ErfiDev/task-manager.git
     cd task-manager
     cd server
     npm i
