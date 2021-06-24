@@ -20,7 +20,7 @@ const Main = ({ match }) => {
 
   return (
     <div className="main">
-      <h1 className="main-h1">Welcome {username}!</h1>
+      <h1 className="main-h1">Hi {username}!</h1>
       <ul className="main-list">
         <li>Your All Tasks : {all}</li>
         <li>Your Completed Tasks : {complete}</li>
