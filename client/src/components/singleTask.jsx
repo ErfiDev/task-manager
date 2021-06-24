@@ -4,28 +4,14 @@ import { Button } from "@material-ui/core";
 import Task from "../services/taskService";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
+import DateUtil from "../utils/date";
 
 const SingleTask = ({ title, time, uuidTask, uuid, status }) => {
   const tasks = useSelector((state) => state.tasks);
   const dis = useDispatch();
 
-  let date = new Date(time);
-  let year = date.getFullYear();
-  let month = date.getMonth() + 1;
-  let day = date.getDate();
-  let hour = date.getHours();
-  let minute = date.getMinutes();
-
-  let finalTime = [
-    (hour < "9" ? "0" : "") + hour,
-    (minute < "9" ? "0" : "") + minute,
-  ].join(":");
-  let finalDate = [
-    year,
-    (month < "9" ? "0" : "") + month,
-    (day < "9" ? "0" : "") + day,
-  ].join("-");
-  let final = [finalDate, finalTime].join(" - - ");
+  let newD = new DateUtil(time, " - - ");
+  let refactorDate = newD.getDate();
 
   async function deleteTask(uuidT) {
     try {
@@ -82,7 +68,7 @@ const SingleTask = ({ title, time, uuidTask, uuid, status }) => {
     >
       <h1 className="single-task-title">{title}</h1>
       <h5 style={{ marginTop: "10px" }} className="single-task-time">
-        {final}
+        {refactorDate}
       </h5>
       <div className="single-task-status-container">
         <Button

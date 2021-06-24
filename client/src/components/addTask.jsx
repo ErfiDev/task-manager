@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { TextField, Button } from "@material-ui/core";
 import Task from "../services/taskService";
 import { toast } from "react-toastify";
+import DateUtil from "../utils/date";
 
 const AddTask = ({ match }) => {
   const [title, setTitle] = useState("");
@@ -9,27 +10,10 @@ const AddTask = ({ match }) => {
   const [date, setDate] = useState("");
 
   useEffect(() => {
-    let now = new Date();
-    let year = now.getFullYear();
-    let month = now.getMonth() + 1;
-    let day = now.getDate();
-    let hour = now.getHours();
-    let minute = now.getMinutes();
+    let dateUtil = new DateUtil(null, "T");
+    let getNowDate = dateUtil.getDate();
 
-    let finalTime = [
-      (hour < "9" ? "0" : "") + hour,
-      (minute < "9" ? "0" : "") + minute,
-    ].join(":");
-
-    let finalDate = [
-      year,
-      (month < "9" ? "0" : "") + month,
-      (day < "9" ? "0" : "") + day,
-    ].join("-");
-
-    let final = [finalDate, finalTime];
-
-    setDate(final.join("T"));
+    setDate(getNowDate);
   }, []);
 
   async function submit(e) {
