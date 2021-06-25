@@ -8,13 +8,7 @@ import Task from "./task";
 import Tasks from "./tasks";
 import AddTask from "./addTask";
 import Account from "./account";
-import {
-  ChangePassword,
-  UnCompletedTasks,
-  ChangeProfile,
-  ChangeUsername,
-  CompletedTasks,
-} from "./common";
+import { ChangePassword, ChangeProfile, ChangeUsername } from "./common";
 import { useSelector, useDispatch } from "react-redux";
 import jwt from "jsonwebtoken";
 
@@ -47,11 +41,6 @@ const Layout = () => {
         <Route path="/user/:uuid/setting" component={Setting} />
         <Route path="/user/:uuid/admin" component={Admin} />
         <Route path="/user/:uuid/account" component={Account} />
-        <Route
-          path="/user/:uuid/UnCompletedTask"
-          component={UnCompletedTasks}
-        />
-        <Route path="/user/:uuid/CompletedTask" component={CompletedTasks} />
         <Route path="/user/:uuid/ChangePassword" component={ChangePassword} />
         <Route path="/user/:uuid/ChangeProfile" component={ChangeProfile} />
         <Route path="/user/:uuid/ChangeUsername" component={ChangeUsername} />

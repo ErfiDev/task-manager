@@ -1,21 +1,5 @@
 import React from "react";
 
-const CompletedTasks = () => {
-  return (
-    <div className="completed-tasks">
-      <h1>Completed tasks</h1>
-    </div>
-  );
-};
-
-const UnCompletedTasks = () => {
-  return (
-    <div className="uncompleted-tasks">
-      <h1>UnCompleted tasks</h1>
-    </div>
-  );
-};
-
 const ChangePassword = () => {
   return (
     <div className="change-password">
@@ -40,10 +24,4 @@ const ChangeUsername = () => {
   );
 };
 
-export {
-  ChangePassword,
-  ChangeProfile,
-  ChangeUsername,
-  UnCompletedTasks,
-  CompletedTasks,
-};
+export { ChangePassword, ChangeProfile, ChangeUsername };

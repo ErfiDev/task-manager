@@ -8,19 +8,6 @@ const Dashboard = ({ match }) => {
     <div className="dashboard">
       <ul className="dashboard-list">
         <li className="dashboard-list-option">
-          Tasks <ChevronRight />
-        </li>
-        <li className="dashboard-list-option">
-          <Link to={`/user/${match.params.uuid}/CompletedTask`}>
-            Completed Tasks <ChevronRight />
-          </Link>
-        </li>
-        <li className="dashboard-list-option">
-          <Link to={`/user/${match.params.uuid}/UnCompletedTask`}>
-            Uncompleted Tasks <ChevronRight />
-          </Link>
-        </li>
-        <li className="dashboard-list-option">
           <Link to={`/user/${match.params.uuid}/ChangePassword`}>
             Change Password <ChevronRight />
           </Link>

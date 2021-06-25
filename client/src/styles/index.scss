@@ -71,6 +71,16 @@
     }
 }
 
+.change-password , .change-profile , .change-username{
+    width: 70%;
+    min-height: 100vh;
+    height: auto;
+
+    @media (max-width : 980px) {
+        width: 100%;
+    }
+}
+
 @keyframes load{
     0%{
         opacity: 0;
