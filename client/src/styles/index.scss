@@ -81,6 +81,29 @@
     }
 }
 
+.change-password{
+    @include Flex(center , center);
+    flex-direction: column;
+    &-h1{
+        margin-bottom: 20px;
+        color: $fontColor;
+    }
+    &-form{
+        @include Flex(center , center);
+        flex-direction: column;
+        #{$bc}: #C2C2C2;
+        padding: 15px;
+        border-radius: 8px;
+        width: 80%;
+        div{
+            margin: 10px;
+        }
+        button{
+            margin: 15px;
+        }
+    }
+}
+
 @keyframes load{
     0%{
         opacity: 0;

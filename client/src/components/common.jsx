@@ -1,9 +1,38 @@
 import React from "react";
+import { TextField, Button } from "@material-ui/core";
 
 const ChangePassword = () => {
   return (
     <div className="change-password">
-      <h1>change-password</h1>
+      <h1 className="change-password-h1">Change Password</h1>
+      <form className="change-password-form">
+        <TextField
+          required
+          label="Current Password"
+          variant="filled"
+          autoFocus={true}
+        />
+        <TextField
+          required
+          label="New Password"
+          variant="filled"
+          autoFocus={true}
+        />
+        <TextField
+          required
+          label="New Password Again"
+          variant="filled"
+          autoFocus={true}
+        />
+        <Button
+          className="change-password-submit"
+          variant="contained"
+          color="primary"
+          type="submit"
+        >
+          Change
+        </Button>
+      </form>
     </div>
   );
 };
