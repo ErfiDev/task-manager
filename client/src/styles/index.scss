@@ -75,6 +75,8 @@
     width: 70%;
     min-height: 100vh;
     height: auto;
+    @include Flex(center , center);
+    flex-direction: column;
 
     @media (max-width : 980px) {
         width: 100%;
@@ -82,8 +84,6 @@
 }
 
 .change-password{
-    @include Flex(center , center);
-    flex-direction: column;
     &-h1{
         margin-bottom: 20px;
         color: $fontColor;
