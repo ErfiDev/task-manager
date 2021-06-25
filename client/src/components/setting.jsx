@@ -1,8 +1,9 @@
 import React from "react";
 import { ChevronRight } from "@material-ui/icons";
 import { Button } from "@material-ui/core";
+import { Link } from "react-router-dom";
 
-const Dashboard = () => {
+const Dashboard = ({ match }) => {
   return (
     <div className="dashboard">
       <ul className="dashboard-list">
@@ -10,19 +11,29 @@ const Dashboard = () => {
           Tasks <ChevronRight />
         </li>
         <li className="dashboard-list-option">
-          Completed Tasks <ChevronRight />
+          <Link to={`/user/${match.params.uuid}/CompletedTask`}>
+            Completed Tasks <ChevronRight />
+          </Link>
         </li>
         <li className="dashboard-list-option">
-          Uncompleted Tasks <ChevronRight />
+          <Link to={`/user/${match.params.uuid}/UnCompletedTask`}>
+            Uncompleted Tasks <ChevronRight />
+          </Link>
         </li>
         <li className="dashboard-list-option">
-          Change Password <ChevronRight />
+          <Link to={`/user/${match.params.uuid}/ChangePassword`}>
+            Change Password <ChevronRight />
+          </Link>
         </li>
         <li className="dashboard-list-option">
-          Change Profile <ChevronRight />
+          <Link to={`/user/${match.params.uuid}/ChangeProfile`}>
+            Change Profile <ChevronRight />
+          </Link>
         </li>
         <li className="dashboard-list-option">
-          Change Username <ChevronRight />
+          <Link to={`/user/${match.params.uuid}/ChangeUsername`}>
+            Change Username <ChevronRight />
+          </Link>
         </li>
       </ul>
       <Button variant="contained" color="secondary">
