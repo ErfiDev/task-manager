@@ -10,7 +10,7 @@ const ChangePassword = () => {
 
 const ChangeProfile = () => {
   return (
-    <div className="ChangeProfile">
+    <div className="change-profile">
       <h1>ChangeProfile</h1>
     </div>
   );
@@ -18,7 +18,7 @@ const ChangeProfile = () => {
 
 const ChangeUsername = () => {
   return (
-    <div className="ChangeUsername">
+    <div className="change-username">
       <h1>ChangeUsername</h1>
     </div>
   );
