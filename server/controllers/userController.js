@@ -440,6 +440,44 @@ async function changeProfile(req , res){
   }
 }
 
+
+async function changeUsername(req , res){
+  const {uuid} = req.params;
+  const {newUsername} = req.body;
+  if(!uuid || !newUsername){
+    return res.json({
+      status: 400,
+      msg: "please complete required params"
+    })
+  } else {
+    let findUser = await model.findOne({uuid});
+    if(!findUser){
+      return res.json({
+        status: 404,
+        msg: "can't find user with this uuid"
+      })
+    } else {
+      model.updateOne({uuid} , {
+        $set: {
+          username: newUsername
+        }
+      } , {} , (err)=>{
+        if(err){
+          return res.json({
+            status: 500,
+            msg: "there is a problem with the server"
+          })
+        }
+
+        res.json({
+          status: 200,
+          msg: "change username success"
+        })
+      })
+    }
+  }
+}
+
 module.exports = {
   register,
   login,
@@ -451,5 +489,6 @@ module.exports = {
   getUserPicture,
   getSpecificTask,
   changePass,
-  changeProfile
+  changeProfile,
+  changeUsername
 };
