@@ -48,7 +48,18 @@ const ChangeProfile = () => {
 const ChangeUsername = () => {
   return (
     <div className="change-username">
-      <h1>ChangeUsername</h1>
+      <h1 className="change-username-h1">Change Username</h1>
+      <form className="change-username-form">
+        <TextField required label="New Username" variant="filled" />
+        <Button
+          className="change-username-submit"
+          variant="contained"
+          color="primary"
+          type="submit"
+        >
+          Change
+        </Button>
+      </form>
     </div>
   );
 };
