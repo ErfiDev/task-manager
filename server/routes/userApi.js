@@ -11,6 +11,7 @@ const {
   getUserPicture,
   getSpecificTask,
   changePass,
+  changeProfile,
 } = require("../controllers/userController");
 
 route.post("/register", register);
@@ -23,5 +24,6 @@ route.get("/getTasks/:uuid?", getTasks);
 route.get("/getUserPicture/:uuid?", getUserPicture);
 route.get("/getSpecificTask/:uuid?/:uuidTask?", getSpecificTask);
 route.put("/changePass/:uuid?", changePass);
+route.put("/changeProfile/:uuid?", changeProfile);
 
 module.exports = route;
