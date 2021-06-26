@@ -1,5 +1,5 @@
-import React from "react";
-import { TextField, Button } from "@material-ui/core";
+import React, { useState } from "react";
+import { TextField, Button, Input } from "@material-ui/core";
 
 const ChangePassword = () => {
   return (
@@ -38,9 +38,47 @@ const ChangePassword = () => {
 };
 
 const ChangeProfile = () => {
+  const [data, setData] = useState({
+    picture: "",
+  });
+  function previewFile() {
+    const input = document.querySelector("input[type=file]").files[0];
+    const reader = new FileReader();
+    reader.addEventListener("load", async () => {
+      if (input.size > 1000000) {
+        const inputS = document.querySelector("input[type=file]");
+        inputS.value = "";
+        return alert("image size is higher than 1 mb");
+      } else {
+        await setData({ ...data, picture: reader.result });
+      }
+    });
+    if (input) {
+      reader.readAsDataURL(input);
+    }
+  }
+
+  console.log(data);
   return (
     <div className="change-profile">
-      <h1>ChangeProfile</h1>
+      <h1 className="change-profile-h1">Change Profile</h1>
+      <form className="change-profile-form">
+        <Input
+          style={{ marginBottom: "25px" }}
+          placeholder="Select your profile photo"
+          type="file"
+          onChange={previewFile}
+          className="type-file"
+        />
+        <Button
+          className="change-profile-submit"
+          variant="contained"
+          color="primary"
+          type="submit"
+        >
+          Change
+        </Button>
+      </form>
     </div>
   );
 };
