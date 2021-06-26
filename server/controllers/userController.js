@@ -347,6 +347,57 @@ async function getSpecificTask(req, res) {
   }
 }
 
+async function changePass(req, res) {
+  const { uuid } = req.params;
+  const { currentPass, newPass } = req.body;
+  if (!uuid || !newPass || !currentPass) {
+    return res.json({
+      status: 400,
+      msg: "please complete required params!",
+    });
+  } else {
+    let findUser = await model.findOne({ uuid });
+    if (!findUser) {
+      return res.json({
+        status: 404,
+        msg: "can't find user with this uuid",
+      });
+    } else {
+      let comparePass = await bcrypt.compare(currentPass, findUser.password);
+      if (!comparePass) {
+        return res.json({
+          status: 400,
+          msg: "current password don't match",
+        });
+      } else {
+        let hashPass = await bcrypt.hash(newPass, 10);
+        model.updateOne(
+          { uuid },
+          {
+            $set: {
+              password: hashPass,
+            },
+          },
+          {},
+          (err) => {
+            if (err) {
+              return res.json({
+                status: 500,
+                msg: "there is a problem with the server",
+              });
+            }
+
+            res.json({
+              status: 200,
+              msg: "password changed",
+            });
+          }
+        );
+      }
+    }
+  }
+}
+
 module.exports = {
   register,
   login,
@@ -357,4 +408,5 @@ module.exports = {
   getTasks,
   getUserPicture,
   getSpecificTask,
+  changePass,
 };

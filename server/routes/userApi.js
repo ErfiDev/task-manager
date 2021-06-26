@@ -10,6 +10,7 @@ const {
   getTasks,
   getUserPicture,
   getSpecificTask,
+  changePass,
 } = require("../controllers/userController");
 
 route.post("/register", register);
@@ -21,5 +22,6 @@ route.post("/deleteTask/:uuid?/:uuidTask?", deleteTask);
 route.get("/getTasks/:uuid?", getTasks);
 route.get("/getUserPicture/:uuid?", getUserPicture);
 route.get("/getSpecificTask/:uuid?/:uuidTask?", getSpecificTask);
+route.put("/changePass/:uuid?", changePass);
 
 module.exports = route;
