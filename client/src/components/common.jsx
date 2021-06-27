@@ -169,12 +169,41 @@ const ChangeProfile = ({ match }) => {
   );
 };
 
-const ChangeUsername = () => {
+const ChangeUsername = ({ match }) => {
+  const [username, setUsername] = useState("");
+  async function submit(e) {
+    e.preventDefault();
+    try {
+      let { data } = await Task.UsernameChange(match.params.uuid, {
+        newUsername: username,
+      });
+      if (data.status === 200) {
+        setUsername("");
+        return toast.success("change username success!", {
+          position: "bottom-right",
+          closeOnClick: true,
+        });
+      } else {
+        toast.error(data.msg, {
+          position: "bottom-right",
+          closeOnClick: true,
+        });
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }
   return (
     <div className="change-username">
       <h1 className="change-username-h1">Change Username</h1>
-      <form className="change-username-form">
-        <TextField required label="New Username" variant="filled" />
+      <form onSubmit={(e) => submit(e)} className="change-username-form">
+        <TextField
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          required
+          label="New Username"
+          variant="filled"
+        />
         <Button
           className="change-username-submit"
           variant="contained"
