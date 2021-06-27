@@ -34,7 +34,10 @@ class Task {
   }
 
   ProfileChange(uuid, data) {
-    return httpService.post(`${Api.changePass}/${uuid}`, JSON.stringify(data));
+    return httpService.post(
+      `${Api.changeProfile}/${uuid}`,
+      JSON.stringify(data)
+    );
   }
 }
 
