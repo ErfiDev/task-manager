@@ -1,28 +1,65 @@
 import React, { useState } from "react";
 import { TextField, Button, Input } from "@material-ui/core";
+// import Task from "../services/taskService";
+import { toast } from "react-toastify";
 
-const ChangePassword = () => {
+const ChangePassword = ({ match }) => {
+  const [data, setData] = useState({
+    currentPass: "",
+    newPass: "",
+    newPassAgain: "",
+  });
+  function changeValues(props) {
+    return (e) => {
+      setData({ ...data, [props]: e.target.value });
+    };
+  }
+  async function submit(e) {
+    e.preventDefault();
+    try {
+      if (data.newPass !== data.newPassAgain) {
+        return toast.error("passwords do't match", {
+          position: "bottom-right",
+          closeOnClick: true,
+        });
+      } else {
+        // let { currentPass, newPass } = data;
+        // let final = { currentPass, newPass };
+        // let res = await Task.PassChange(match.params.uuid, final);
+        // console.log(res);
+        console.log("test");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }
   return (
     <div className="change-password">
       <h1 className="change-password-h1">Change Password</h1>
-      <form className="change-password-form">
+      <form onSubmit={(e) => submit(e)} className="change-password-form">
         <TextField
           required
           label="Current Password"
           variant="filled"
           autoFocus={true}
+          value={data.currentPass}
+          onChange={changeValues("currentPass")}
         />
         <TextField
           required
           label="New Password"
           variant="filled"
           autoFocus={true}
+          value={data.newPass}
+          onChange={changeValues("newPass")}
         />
         <TextField
           required
           label="New Password Again"
           variant="filled"
           autoFocus={true}
+          value={data.newPassAgain}
+          onChange={changeValues("newPassAgain")}
         />
         <Button
           className="change-password-submit"
