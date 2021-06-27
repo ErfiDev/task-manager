@@ -120,7 +120,19 @@ const ChangeProfile = ({ match }) => {
         newPic: data.picture,
       };
       let { data: res } = await Task.ProfileChange(match.params.uuid, thisData);
-      console.log(res);
+      if (res.status === 200) {
+        setData({ picture: "", password: "" });
+        document.querySelector("input[type=file]").value = "";
+        return toast.success("change picture success!", {
+          position: "bottom-right",
+          closeOnClick: true,
+        });
+      } else {
+        toast.error(res.msg, {
+          position: "bottom-right",
+          closeOnClick: true,
+        });
+      }
     } catch (err) {
       console.log(err);
     }
