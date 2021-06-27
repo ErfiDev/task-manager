@@ -464,28 +464,36 @@ async function changeUsername(req, res) {
         msg: "can't find user with this uuid",
       });
     } else {
-      model.updateOne(
-        { uuid },
-        {
-          $set: {
-            username: newUsername,
+      let findByNewUsername = await model.find({ username: newUsername });
+      if (findByNewUsername.length > 0) {
+        return res.json({
+          msg: "can't change username this username is used",
+          status: 400,
+        });
+      } else {
+        model.updateOne(
+          { uuid },
+          {
+            $set: {
+              username: newUsername,
+            },
           },
-        },
-        {},
-        (err) => {
-          if (err) {
-            return res.json({
-              status: 500,
-              msg: "there is a problem with the server",
+          {},
+          (err) => {
+            if (err) {
+              return res.json({
+                status: 500,
+                msg: "there is a problem with the server",
+              });
+            }
+
+            res.json({
+              status: 200,
+              msg: "change username success",
             });
           }
-
-          res.json({
-            status: 200,
-            msg: "change username success",
-          });
-        }
-      );
+        );
+      }
     }
   }
 }
