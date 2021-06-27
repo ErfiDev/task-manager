@@ -24,6 +24,18 @@ class Task {
   getSpecificTask(uuid, uuidTask) {
     return httpService.get(`${Api.specificTask}/${uuid}/${uuidTask}`);
   }
+
+  UsernameChange(uuid, data) {
+    return httpService.put(`${Api.changeUser}/${uuid}`, JSON.stringify(data));
+  }
+
+  PassChange(uuid, data) {
+    return httpService.put(`${Api.changePass}/${uuid}`, JSON.stringify(data));
+  }
+
+  ProfileChange(uuid, data) {
+    return httpService.put(`${Api.changePass}/${uuid}`, JSON.stringify(data));
+  }
 }
 
 export default new Task();
