@@ -17,6 +17,10 @@ class User {
   getPicture(uuid) {
     return httpService.get(`${Api.findPicture}/${uuid}`);
   }
+
+  userInfo(uuid) {
+    return httpService.get(`${Api.getUserInfo}/${uuid}`);
+  }
 }
 
 export default new User();

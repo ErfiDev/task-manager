@@ -10,5 +10,6 @@
   "specificTask": "http://localhost:5000/api/user/getSpecificTask",
   "changePass": "http://localhost:5000/api/user/changePass",
   "changeUser": "http://localhost:5000/api/user/changeUsername",
-  "changeProfile": "http://localhost:5000/api/user/changeProfile"
+  "changeProfile": "http://localhost:5000/api/user/changeProfile",
+  "getUserInfo": "http://localhost:5000/api/user/userInfo"
 }
