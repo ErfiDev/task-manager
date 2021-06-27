@@ -24,11 +24,26 @@ const ChangePassword = ({ match }) => {
         });
       } else {
         let { currentPass, newPass } = data;
-        let res = await Task.PassChange(match.params.uuid, {
+        let { data: res } = await Task.PassChange(match.params.uuid, {
           currentPass,
           newPass,
         });
-        console.log(res);
+        if (res.status === 200) {
+          setData({
+            currentPass: "",
+            newPass: "",
+            newPassAgain: "",
+          });
+          return toast.success("password changed success", {
+            position: "bottom-right",
+            closeOnClick: true,
+          });
+        } else {
+          toast.error(res.msg, {
+            position: "bottom-right",
+            closeOnClick: true,
+          });
+        }
       }
     } catch (err) {
       console.log(err);
@@ -50,7 +65,7 @@ const ChangePassword = ({ match }) => {
           required
           label="New Password"
           variant="filled"
-          autoFocus={true}
+          autoFocus={false}
           value={data.newPass}
           onChange={changeValues("newPass")}
         />
@@ -58,7 +73,7 @@ const ChangePassword = ({ match }) => {
           required
           label="New Password Again"
           variant="filled"
-          autoFocus={true}
+          autoFocus={false}
           value={data.newPassAgain}
           onChange={changeValues("newPassAgain")}
         />
