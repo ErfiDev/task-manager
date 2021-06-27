@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { TextField, Button, Input } from "@material-ui/core";
-// import Task from "../services/taskService";
+import Task from "../services/taskService";
 import { toast } from "react-toastify";
 
 const ChangePassword = ({ match }) => {
@@ -23,11 +23,12 @@ const ChangePassword = ({ match }) => {
           closeOnClick: true,
         });
       } else {
-        // let { currentPass, newPass } = data;
-        // let final = { currentPass, newPass };
-        // let res = await Task.PassChange(match.params.uuid, final);
-        // console.log(res);
-        console.log("test");
+        let { currentPass, newPass } = data;
+        let res = await Task.PassChange(match.params.uuid, {
+          currentPass,
+          newPass,
+        });
+        console.log(res);
       }
     } catch (err) {
       console.log(err);

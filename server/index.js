@@ -9,6 +9,7 @@ const App = express();
 const PORT = process.env.PORT || 5000;
 
 App.use(express.json({ limit: "25mb" }));
+App.use(express.urlencoded({ extended: true }));
 App.use(cors());
 
 mongoose.connect(

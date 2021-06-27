@@ -26,15 +26,15 @@ class Task {
   }
 
   UsernameChange(uuid, data) {
-    return httpService.put(`${Api.changeUser}/${uuid}`, JSON.stringify(data));
+    return httpService.post(`${Api.changeUser}/${uuid}`, JSON.stringify(data));
   }
 
   PassChange(uuid, data) {
-    return httpService.put(`${Api.changePass}/${uuid}`, JSON.stringify(data));
+    return httpService.post(`${Api.changePass}/${uuid}`, JSON.stringify(data));
   }
 
   ProfileChange(uuid, data) {
-    return httpService.put(`${Api.changePass}/${uuid}`, JSON.stringify(data));
+    return httpService.post(`${Api.changePass}/${uuid}`, JSON.stringify(data));
   }
 }
 

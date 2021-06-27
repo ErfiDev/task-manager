@@ -398,82 +398,94 @@ async function changePass(req, res) {
   }
 }
 
-async function changeProfile(req , res){
-  const {uuid} = req.params;
-  const {password , newPic} = req.body;
-  if(!uuid || !password || !newPic){
+async function changeProfile(req, res) {
+  const { uuid } = req.params;
+  const { password, newPic } = req.body;
+  if (!uuid || !password || !newPic) {
     return res.json({
       status: 400,
-      msg: "please provide a required items"
-    })
+      msg: "please provide a required items",
+    });
   } else {
-    let findUser = await model.findOne({uuid});
-    if(!findUser){
+    let findUser = await model.findOne({ uuid });
+    if (!findUser) {
       return res.json({
         status: 404,
-        msg: "can't find user with this uuid"
-      })
+        msg: "can't find user with this uuid",
+      });
     } else {
-      let comparePass = await bcrypt.compare(password , findUser.password);
-      if(!comparePass){
+      let comparePass = await bcrypt.compare(password, findUser.password);
+      if (!comparePass) {
         return res.json({
           status: 400,
-          msg: "password don't match"
-        })
+          msg: "password don't match",
+        });
       } else {
-        model.updateOne({uuid} , {
-          $set: {
-            picture: newPic
-          }
-        } , {} , (err)=> {
-          if(err){
-            return res.json({status: 500 , msg: "there is a problem with the server"});
-          } 
+        model.updateOne(
+          { uuid },
+          {
+            $set: {
+              picture: newPic,
+            },
+          },
+          {},
+          (err) => {
+            if (err) {
+              return res.json({
+                status: 500,
+                msg: "there is a problem with the server",
+              });
+            }
 
-          res.json({
-            status: 200,
-            msg: "profile changing success"
-          })
-        })
+            res.json({
+              status: 200,
+              msg: "profile changing success",
+            });
+          }
+        );
       }
     }
   }
 }
 
-
-async function changeUsername(req , res){
-  const {uuid} = req.params;
-  const {newUsername} = req.body;
-  if(!uuid || !newUsername){
+async function changeUsername(req, res) {
+  const { uuid } = req.params;
+  const { newUsername } = req.body;
+  if (!uuid || !newUsername) {
     return res.json({
       status: 400,
-      msg: "please complete required params"
-    })
+      msg: "please complete required params",
+    });
   } else {
-    let findUser = await model.findOne({uuid});
-    if(!findUser){
+    let findUser = await model.findOne({ uuid });
+    if (!findUser) {
       return res.json({
         status: 404,
-        msg: "can't find user with this uuid"
-      })
+        msg: "can't find user with this uuid",
+      });
     } else {
-      model.updateOne({uuid} , {
-        $set: {
-          username: newUsername
-        }
-      } , {} , (err)=>{
-        if(err){
-          return res.json({
-            status: 500,
-            msg: "there is a problem with the server"
-          })
-        }
+      model.updateOne(
+        { uuid },
+        {
+          $set: {
+            username: newUsername,
+          },
+        },
+        {},
+        (err) => {
+          if (err) {
+            return res.json({
+              status: 500,
+              msg: "there is a problem with the server",
+            });
+          }
 
-        res.json({
-          status: 200,
-          msg: "change username success"
-        })
-      })
+          res.json({
+            status: 200,
+            msg: "change username success",
+          });
+        }
+      );
     }
   }
 }
@@ -490,5 +502,5 @@ module.exports = {
   getSpecificTask,
   changePass,
   changeProfile,
-  changeUsername
+  changeUsername,
 };
