@@ -506,10 +506,7 @@ async function userInfo(req, res) {
       status: 400,
     });
   } else {
-    let findUser = await model.findOne(
-      { uuid },
-      { username: 1, _id: 0, tasks: 1, joinedDate: 1 }
-    );
+    let findUser = await model.findOne({ uuid });
     if (!findUser) {
       return res.json({
         msg: "can't find user with this uuid",
@@ -518,11 +515,7 @@ async function userInfo(req, res) {
     } else {
       res.json({
         status: 200,
-        payload: {
-          username: findUser.username,
-          tasks: findUser.tasks,
-          joinedDate: findUser.joinedDate,
-        },
+        payload: findUser,
       });
     }
   }
