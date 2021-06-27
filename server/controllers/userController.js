@@ -498,6 +498,36 @@ async function changeUsername(req, res) {
   }
 }
 
+async function userInfo(req, res) {
+  const { uuid } = req.params;
+  if (!uuid) {
+    return res.json({
+      msg: "please complete required params",
+      status: 400,
+    });
+  } else {
+    let findUser = await model.findOne(
+      { uuid },
+      { username: 1, _id: 0, tasks: 1, joinedDate: 1 }
+    );
+    if (!findUser) {
+      return res.json({
+        msg: "can't find user with this uuid",
+        status: 404,
+      });
+    } else {
+      res.json({
+        status: 200,
+        payload: {
+          username: findUser.username,
+          tasks: findUser.tasks,
+          joinedDate: findUser.joinedDate,
+        },
+      });
+    }
+  }
+}
+
 module.exports = {
   register,
   login,
@@ -511,4 +541,5 @@ module.exports = {
   changePass,
   changeProfile,
   changeUsername,
+  userInfo,
 };

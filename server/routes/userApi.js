@@ -13,6 +13,7 @@ const {
   changePass,
   changeProfile,
   changeUsername,
+  userInfo,
 } = require("../controllers/userController");
 
 route.post("/register", register);
@@ -27,5 +28,6 @@ route.get("/getSpecificTask/:uuid?/:uuidTask?", getSpecificTask);
 route.post("/changePass/:uuid?", changePass);
 route.post("/changeProfile/:uuid?", changeProfile);
 route.post("/changeUsername/:uuid?", changeUsername);
+route.get("/userInfo/:uuid?", userInfo);
 
 module.exports = route;
