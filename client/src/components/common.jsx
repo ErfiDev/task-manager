@@ -90,9 +90,10 @@ const ChangePassword = ({ match }) => {
   );
 };
 
-const ChangeProfile = () => {
+const ChangeProfile = ({ match }) => {
   const [data, setData] = useState({
     picture: "",
+    password: "",
   });
   function previewFile() {
     const input = document.querySelector("input[type=file]").files[0];
@@ -111,11 +112,31 @@ const ChangeProfile = () => {
     }
   }
 
-  console.log(data);
+  async function submit(e) {
+    e.preventDefault();
+    try {
+      let thisData = {
+        password: data.password,
+        newPic: data.picture,
+      };
+      let { data: res } = await Task.ProfileChange(match.params.uuid, thisData);
+      console.log(res);
+    } catch (err) {
+      console.log(err);
+    }
+  }
   return (
     <div className="change-profile">
       <h1 className="change-profile-h1">Change Profile</h1>
-      <form className="change-profile-form">
+      <form onSubmit={(e) => submit(e)} className="change-profile-form">
+        <TextField
+          required
+          label="Your Password"
+          variant="filled"
+          autoFocus={true}
+          value={data.password}
+          onChange={(e) => setData({ ...data, password: e.target.value })}
+        />
         <Input
           style={{ marginBottom: "25px" }}
           placeholder="Select your profile photo"
