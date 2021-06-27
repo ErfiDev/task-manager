@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { TextField, Button, Input } from "@material-ui/core";
+import { ChevronRight } from "@material-ui/icons";
 import Task from "../services/taskService";
 import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 
 const ChangePassword = ({ match }) => {
   const [data, setData] = useState({
@@ -86,6 +88,10 @@ const ChangePassword = ({ match }) => {
           Change
         </Button>
       </form>
+      <Link className="back-link" to={`/user/${match.params.uuid}/setting`}>
+        Back
+        <ChevronRight />
+      </Link>
     </div>
   );
 };
@@ -165,6 +171,10 @@ const ChangeProfile = ({ match }) => {
           Change
         </Button>
       </form>
+      <Link className="back-link" to={`/user/${match.params.uuid}/setting`}>
+        Back
+        <ChevronRight />
+      </Link>
     </div>
   );
 };
@@ -213,6 +223,10 @@ const ChangeUsername = ({ match }) => {
           Change
         </Button>
       </form>
+      <Link className="back-link" to={`/user/${match.params.uuid}/setting`}>
+        Back
+        <ChevronRight />
+      </Link>
     </div>
   );
 };

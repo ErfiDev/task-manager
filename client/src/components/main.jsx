@@ -26,7 +26,7 @@ const Main = ({ match }) => {
         <li>Your Completed Tasks : {complete}</li>
         <li>Your UnCompleted Tasks : {unComplete}</li>
       </ul>
-      <Link className="main-link" to={`/user/${match.params.uuid}/addTask`}>
+      <Link className="back-link" to={`/user/${match.params.uuid}/addTask`}>
         Add Task
       </Link>
     </div>
