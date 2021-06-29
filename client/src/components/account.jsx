@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { toast } from "react-toastify";
 import FilterTasksAction from "../actions/filterTasksAction";
 import User from "../services/userService";
+import Toast from "../utils/toast";
 
 const Account = ({ match }) => {
   const UserInfo = useSelector((state) => state.user);
@@ -22,10 +22,7 @@ const Account = ({ match }) => {
         if (data.status === 200) {
           return dis({ type: "SET_USER", payload: data.payload });
         } else {
-          toast.error("server is down! please refresh page", {
-            position: "bottom-right",
-            closeOnClick: true,
-          });
+          Toast("server is down! please refresh page", "error");
         }
       } catch (err) {
         console.log(err);
