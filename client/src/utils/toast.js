@@ -8,7 +8,7 @@ export default function Toast(msg, event) {
     });
   }
   if (event === "error") {
-    return toast.success(msg, {
+    return toast.error(msg, {
       position: "bottom-right",
       closeOnClick: true,
     });

@@ -9,8 +9,8 @@ import {
 import { Visibility, VisibilityOff } from "@material-ui/icons";
 import { Link, withRouter } from "react-router-dom";
 import User from "../services/userService";
-import { toast } from "react-toastify";
 import jwt from "jsonwebtoken";
+import Toast from "../utils/toast";
 
 const Login = ({ history }) => {
   const [data, setData] = useState({
@@ -44,15 +44,9 @@ const Login = ({ history }) => {
         setTimeout(() => {
           history.push(`/user/${payload.token.uuid}`);
         }, 3000);
-        return toast.success("Login successfull!", {
-          position: "bottom-right",
-          closeOnClick: true,
-        });
+        return Toast("Login successfull!", "success");
       } else {
-        toast.error(response.msg, {
-          position: "bottom-right",
-          closeOnClick: true,
-        });
+        Toast(response.msg, "error");
       }
     } catch (err) {
       console.log(err);
