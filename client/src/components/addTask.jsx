@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { TextField, Button } from "@material-ui/core";
 import Task from "../services/taskService";
-import { toast } from "react-toastify";
 import DateUtil from "../utils/date";
+import Toast from "../utils/toast";
 
 const AddTask = ({ match }) => {
   const [title, setTitle] = useState("");
@@ -29,15 +29,9 @@ const AddTask = ({ match }) => {
       if (res.status === 200) {
         setTitle("");
         setTime("");
-        return toast.success(res.msg, {
-          position: "bottom-right",
-          closeOnClick: true,
-        });
+        return Toast(res.msg, "success");
       } else {
-        toast.error(res.msg, {
-          position: "bottom-right",
-          closeOnClick: true,
-        });
+        Toast(res.msg, "error");
       }
     } catch (err) {
       console.log(err);
