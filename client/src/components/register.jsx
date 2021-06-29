@@ -11,7 +11,7 @@ import {
 import { Visibility, VisibilityOff } from "@material-ui/icons";
 import { Link, withRouter } from "react-router-dom";
 import User from "../services/userService";
-import { toast } from "react-toastify";
+import Toast from '../utils/toast';
 
 const Register = ({ history }) => {
   const [data, setData] = useState({
@@ -67,20 +67,11 @@ const Register = ({ history }) => {
       if (response.status === 201) {
         setTimeout(() => {
           history.push("/");
-          toast("please login", {
-            position: "bottom-right",
-            closeOnClick: true,
-          });
+          Toast("please login");
         }, 3000);
-        return toast.success("register successfull!", {
-          position: "bottom-right",
-          closeOnClick: true,
-        });
+        return Toast("register successfull!" , "success");
       } else {
-        toast.error(response.msg, {
-          position: "bottom-right",
-          closeOnClick: true,
-        });
+        Toast(response.msg , "error");
       }
     } catch (err) {
       console.log(err);
