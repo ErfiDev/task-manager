@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { TextField, Button, Input } from "@material-ui/core";
 import { ChevronRight } from "@material-ui/icons";
 import Task from "../services/taskService";
-import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
+import Toast from "../utils/toast";
 
 const ChangePassword = ({ match }) => {
   const [data, setData] = useState({
@@ -20,10 +20,7 @@ const ChangePassword = ({ match }) => {
     e.preventDefault();
     try {
       if (data.newPass !== data.newPassAgain) {
-        return toast.error("passwords do't match", {
-          position: "bottom-right",
-          closeOnClick: true,
-        });
+        return Toast("passwords do't match", "error");
       } else {
         let { currentPass, newPass } = data;
         let { data: res } = await Task.PassChange(match.params.uuid, {
@@ -36,15 +33,9 @@ const ChangePassword = ({ match }) => {
             newPass: "",
             newPassAgain: "",
           });
-          return toast.success("password changed success", {
-            position: "bottom-right",
-            closeOnClick: true,
-          });
+          return Toast("password changed success", "success");
         } else {
-          toast.error(res.msg, {
-            position: "bottom-right",
-            closeOnClick: true,
-          });
+          Toast(res.msg, "error");
         }
       }
     } catch (err) {
@@ -129,15 +120,9 @@ const ChangeProfile = ({ match }) => {
       if (res.status === 200) {
         setData({ picture: "", password: "" });
         document.querySelector("input[type=file]").value = "";
-        return toast.success("change picture success!", {
-          position: "bottom-right",
-          closeOnClick: true,
-        });
+        return Toast("change picture success!", "success");
       } else {
-        toast.error(res.msg, {
-          position: "bottom-right",
-          closeOnClick: true,
-        });
+        Toast(res.msg, "error");
       }
     } catch (err) {
       console.log(err);
@@ -189,15 +174,9 @@ const ChangeUsername = ({ match }) => {
       });
       if (data.status === 200) {
         setUsername("");
-        return toast.success("change username success!", {
-          position: "bottom-right",
-          closeOnClick: true,
-        });
+        return Toast("change username success!", "success");
       } else {
-        toast.error(data.msg, {
-          position: "bottom-right",
-          closeOnClick: true,
-        });
+        Toast(data.msg, "error");
       }
     } catch (err) {
       console.log(err);
