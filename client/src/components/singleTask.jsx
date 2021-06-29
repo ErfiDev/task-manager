@@ -2,9 +2,9 @@ import React from "react";
 import { Done, Close } from "@material-ui/icons";
 import { Button } from "@material-ui/core";
 import Task from "../services/taskService";
-import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import DateUtil from "../utils/date";
+import Toast from "../utils/toast";
 
 const SingleTask = ({ title, time, uuidTask, uuid, status }) => {
   const tasks = useSelector((state) => state.tasks);
@@ -19,15 +19,9 @@ const SingleTask = ({ title, time, uuidTask, uuid, status }) => {
       if (data.status === 200) {
         let filter = await tasks.filter((item) => item.uuid !== uuidT);
         dis({ type: "SET_TASKS", payload: filter });
-        return toast.info(data.msg, {
-          position: "bottom-right",
-          closeOnClick: true,
-        });
+        return Toast(data.msg);
       } else {
-        return toast.error(data.msg, {
-          position: "bottom-right",
-          closeOnClick: true,
-        });
+        Toast(data.msg, "error");
       }
     } catch (err) {
       console.log(err);
@@ -39,15 +33,9 @@ const SingleTask = ({ title, time, uuidTask, uuid, status }) => {
       let { data } = await Task.editTask(uuUser, uuTask, { status: true });
       if (data.status === 200) {
         updateTask(uuUser, uuTask);
-        return toast.info("Task Completed", {
-          position: "bottom-right",
-          closeOnClick: true,
-        });
+        return Toast("Task Completed");
       } else {
-        return toast.error(data.msg, {
-          position: "bottom-right",
-          closeOnClick: true,
-        });
+        Toast(data.msg, "error");
       }
     } catch (error) {
       console.log(error);

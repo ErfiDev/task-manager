@@ -1,5 +1,5 @@
 import axios from "axios";
-import { toast } from "react-toastify";
+import Toast from "../utils/toast";
 
 axios.defaults.headers.post["Content-Type"] = "application/json";
 
@@ -9,10 +9,7 @@ axios.interceptors.response.use(null, (error) => {
     error.response.status >= 400 &&
     error.response.status < 500;
   if (!expectedError) {
-    toast("There is a problem with the server", {
-      position: "bottom-right",
-      closeOnClick: true,
-    });
+    Toast("There is a problem with the server");
   }
 
   return Promise.reject(error);

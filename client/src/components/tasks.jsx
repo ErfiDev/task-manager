@@ -1,8 +1,8 @@
 import React, { Fragment, useEffect } from "react";
-import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import Task from "../services/taskService";
 import SingleTask from "./singleTask";
+import Toast from "../utils/toast";
 
 const Tasks = ({ match }) => {
   const tasks = useSelector((state) => state.tasks);
@@ -13,10 +13,7 @@ const Tasks = ({ match }) => {
       if (data.status === 200) {
         return dis({ type: "SET_TASKS", payload: data.tasks });
       } else {
-        toast.error("can't get tasks", {
-          position: "bottom-right",
-          closeOnClick: true,
-        });
+        Toast("can't get tasks", "error");
       }
     }
     get();
