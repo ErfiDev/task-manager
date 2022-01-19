@@ -6,7 +6,7 @@ const Footer = () => {
       <p className="footer-p">
         Code, design and copy by: &nbsp;
         <span className="who">who do you think?</span>
-        &nbsp; © 2021 Erfan Hanif.
+        &nbsp; © 2022 Erfan Hanif.
       </p>
     </footer>
   );
